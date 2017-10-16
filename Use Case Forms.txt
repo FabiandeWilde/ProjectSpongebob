@@ -1,0 +1,2 @@
+Definition of Done: Alle overbodige Forms zijn weg
+Definition of Ready: Je weet welke schermen je moet laten zien en welke in een enkel scherm geplaatst kunnen worden.
