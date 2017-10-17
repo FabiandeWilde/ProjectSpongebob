@@ -21,11 +21,14 @@ namespace Meme_Ory_Game
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            int[] numberCards = new int[64];        // Atm 6x6, manier zoeken om dit te maken zodat gebruiker kiest hoe groot het speelveld is
+             
+            int Amount = 4;
+            int Amountx = Convert.ToInt16(Math.Pow(Amount, 2));
+            int[] numberCards = new int[Amountx];        // Atm 6x6, manier zoeken om dit te maken zodat gebruiker kiest hoe groot het speelveld is
             int[] randomarray = random(numberCards);        // Running 'Random' method from below to fix position numbers
 
-            int Row = Convert.ToInt16(Math.Sqrt(numberCards.Length));
-            int Column = Convert.ToInt16(Math.Sqrt(numberCards.Length));
+            int Row = Amount;
+            int Column = Amount;
             tableLayoutPanel1.RowCount = Row;
             tableLayoutPanel1.ColumnCount = Column;
             for (int i = 0; i < (Row); i++)         // Amount of cells, 4rows by 4columns
