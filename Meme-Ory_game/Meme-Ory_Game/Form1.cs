@@ -14,14 +14,14 @@ namespace Meme_Ory_Game
     {
         int Amount;
         ComboBox Speelveld = new ComboBox();
-        Button start = new Button();
+        Button Start = new Button();
+        Button Secondstart = new Button();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
 
         public Form1()
         {
             InitializeComponent();
-            CreateStartButton();
-            CreateComboBox();
+            CreateStartbutton();           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,17 +29,25 @@ namespace Meme_Ory_Game
             
         }
 
-        public void CreateStartButton()
+        public void CreateStartbutton()
         {
             int topstart = 200;
             int leftstart = 200;
-            this.Controls.Add(start);
-            start.Size = new Size(150, 150);
-            start.Left = leftstart;
-            start.Top = topstart;
-            start.Text = "start";
-            start.BackgroundImageLayout = ImageLayout.Stretch;
-            start.Click += new EventHandler(this.Startbutton_Click);
+            this.Controls.Add(Start);
+            Start.Size = new Size(150, 150);
+            Start.Left = leftstart;
+            Start.Top = topstart;
+            Start.Text = "start";
+            Start.BackgroundImageLayout = ImageLayout.Stretch;
+            Start.Click += new EventHandler(this.Startbutton_Click);
+        }
+
+        public void CreateSecondStart()
+        {
+            this.Controls.Add(Secondstart);
+            Secondstart.Size = new Size(100, 100);
+            Secondstart.Location= new Point (100,100);
+            Secondstart.Click += new EventHandler(this.Secondstart_Click);
         }
 
         public void CreateComboBox()
@@ -95,6 +103,13 @@ namespace Meme_Ory_Game
 
         public void Startbutton_Click(object sender, EventArgs e)
         {
+            CreateSecondStart();
+            CreateComboBox();
+            start.Visible = false;
+        }
+
+        public void Secondstart_Click (object sender, EventArgs e)
+        {
             if (Speelveld.Text == "4x4")
                 Amount = 4;
             if (Speelveld.Text == "5x5")
@@ -106,7 +121,7 @@ namespace Meme_Ory_Game
             if (Speelveld.Text == "8x8")
                 Amount = 8;
             Speelveld.Visible = false;
-            start.Visible = false;
+            Secondstart.Visible = false;
             CreateResetButton();
             CreateLayoutPanel();                    
         }
