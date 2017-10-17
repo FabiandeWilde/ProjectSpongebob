@@ -13,6 +13,7 @@ namespace Meme_Ory_Game
     public partial class Form1 : Form
     {
         int Amount=6;
+        ComboBox Speelveld = new ComboBox();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
         public Form1()
         {
@@ -43,7 +44,8 @@ namespace Meme_Ory_Game
         public void CreateComboBox()
         {
             ComboBox Speelveld = new ComboBox();
-            
+            this.Controls.Add(Speelveld);
+            Speelveld.Items.AddRange(new object[] { "4x4", "5x5", "6x6", "7x7", "8x8" });
         }
 
         public void CreateLayoutPanel()
