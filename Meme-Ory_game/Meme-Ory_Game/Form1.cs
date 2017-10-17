@@ -50,12 +50,28 @@ namespace Meme_Ory_Game
             Speelveld.Items.AddRange(new object[] { "4x4", "5x5", "6x6", "7x7", "8x8" });
         }
 
+        public void CreateResetButton()
+        {
+            int topreset = 350;
+            int leftreset = 100;
+            Button reset = new Button();
+            this.Controls.Add(reset);
+            reset.Size = new Size(100,20);
+            reset.Left = leftreset;
+            reset.Top = topreset;
+            reset.Text = "reset";
+            reset.BackgroundImageLayout = ImageLayout.Stretch;
+            reset.Click += new EventHandler(this.Resetbutton_Click);
+        }
+
         public void CreateLayoutPanel()
         {
+            MemoryPanel.Controls.Clear();
+            MemoryPanel.RowStyles.Clear();
+            MemoryPanel.ColumnStyles.Clear();
             int Amountx = Convert.ToInt16(Math.Pow(Amount, 2));
             int[] numberCards = new int[Amountx];       
             int[] randomarray = random(numberCards);
-            TableLayoutPanel MemoryPanel = new TableLayoutPanel();
             MemoryPanel.Location = new System.Drawing.Point(26, 12);
             MemoryPanel.Size = new System.Drawing.Size(300,300);
             MemoryPanel.RowCount = Amount;
@@ -91,7 +107,13 @@ namespace Meme_Ory_Game
                 Amount = 8;
             Speelveld.Visible = false;
             start.Visible = false;
+            CreateResetButton();
             CreateLayoutPanel();                    
+        }
+
+        public void Resetbutton_Click(object sender, EventArgs e)
+        {
+            CreateLayoutPanel();
         }
 
         public static int[] random(int[] array)         // Method to refill the 0,0 array with random non-duplicate numbers between from 1 to 16
@@ -112,7 +134,6 @@ namespace Meme_Ory_Game
 
         public static Image KrijgImage(int nummer) //Method voor de BackgroundImage
         {
-
             switch (nummer)
             {
                 //elk paar krijgt dezelfde achtergrond via button_Click
@@ -186,7 +207,6 @@ namespace Meme_Ory_Game
                     Image dickbutt = null;
                     return dickbutt;
             }
-
         }
 
     }
