@@ -105,7 +105,7 @@ namespace Meme_Ory_Game
         {
             CreateSecondStart();
             CreateComboBox();
-            start.Visible = false;
+            Start.Visible = false;
         }
 
         public void Secondstart_Click (object sender, EventArgs e)
