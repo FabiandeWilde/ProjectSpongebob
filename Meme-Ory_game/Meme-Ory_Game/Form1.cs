@@ -12,13 +12,16 @@ namespace Meme_Ory_Game
 {
     public partial class Form1 : Form
     {
-        int Amount=6;
+        int Amount;
         ComboBox Speelveld = new ComboBox();
+        Button start = new Button();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
+
         public Form1()
         {
             InitializeComponent();
             CreateStartButton();
+            CreateComboBox();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,9 +31,8 @@ namespace Meme_Ory_Game
 
         public void CreateStartButton()
         {
-            int topstart = 400;
+            int topstart = 200;
             int leftstart = 200;
-            Button start = new Button();
             this.Controls.Add(start);
             start.Size = new Size(150, 150);
             start.Left = leftstart;
@@ -38,13 +40,13 @@ namespace Meme_Ory_Game
             start.Text = "start";
             start.BackgroundImageLayout = ImageLayout.Stretch;
             start.Click += new EventHandler(this.Startbutton_Click);
-
         }
 
         public void CreateComboBox()
         {
-            ComboBox Speelveld = new ComboBox();
             this.Controls.Add(Speelveld);
+            Speelveld.Location = new Point (100, 200);
+            Speelveld.Size = new Size(100, 100);
             Speelveld.Items.AddRange(new object[] { "4x4", "5x5", "6x6", "7x7", "8x8" });
         }
 
@@ -55,15 +57,13 @@ namespace Meme_Ory_Game
             int[] randomarray = random(numberCards);
             TableLayoutPanel MemoryPanel = new TableLayoutPanel();
             MemoryPanel.Location = new System.Drawing.Point(26, 12);
-            MemoryPanel.Name = "TableLayoutPanel1";
             MemoryPanel.Size = new System.Drawing.Size(300,300);
-            MemoryPanel.BackColor = System.Drawing.Color.Black;
             MemoryPanel.RowCount = Amount;
             MemoryPanel.ColumnCount = Amount;
             for (int i = 0; i < (Amount); i++)        
             {
-                MemoryPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 12));
-                MemoryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
+                MemoryPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                MemoryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
             }
             for (int i = 0; i < (Amount * Amount); i++)            
             {
@@ -73,18 +73,25 @@ namespace Meme_Ory_Game
                 button.Dock = DockStyle.Fill;
                 MemoryPanel.Controls.Add(button);
                 button.Click += new System.EventHandler(FlipCard);
-
             }
-            MemoryPanel.Visible = true;
             this.Controls.Add(MemoryPanel);
         }
 
-
-
         public void Startbutton_Click(object sender, EventArgs e)
         {
-            CreateLayoutPanel();
-                       
+            if (Speelveld.Text == "4x4")
+                Amount = 4;
+            if (Speelveld.Text == "5x5")
+                Amount = 5;
+            if (Speelveld.Text == "6x6")
+                Amount = 6;
+            if (Speelveld.Text == "7x7")
+                Amount = 7;
+            if (Speelveld.Text == "8x8")
+                Amount = 8;
+            Speelveld.Visible = false;
+            start.Visible = false;
+            CreateLayoutPanel();                    
         }
 
         public static int[] random(int[] array)         // Method to refill the 0,0 array with random non-duplicate numbers between from 1 to 16
