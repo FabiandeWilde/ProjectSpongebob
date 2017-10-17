@@ -1,9 +1,0 @@
-4x4 matrix voor kaartposities.
-willekeurige kaartposities.
-kaarten liggen gesloten.
-als je aan de beurt bent draai je een kaart naar keuze om, en daarna een tweede kaart.
-als de kaarten gelijk zijn blijven ze open liggen, en blijf je aan de beurt.
-als de kaarten niet gelijk zijn keren ze weer om, en is de andere aan beurt.
-Ga door tot alle kaarten omgedraaid zijn.
-Per correct paar krijgt de speler die deze omdraaide 1 punt.
-
