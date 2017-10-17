@@ -12,9 +12,12 @@ namespace Meme_Ory_Game
 {
     public partial class Form1 : Form
     {
+        int Amount=6;
+        TableLayoutPanel MemoryPanel = new TableLayoutPanel();
         public Form1()
         {
             InitializeComponent();
+            CreateStartButton();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -22,31 +25,64 @@ namespace Meme_Ory_Game
             
         }
 
-        private void startbutton_Click(object sender, EventArgs e)
+        public void CreateStartButton()
         {
-            int Amount = 4;
-            int Amountx = Convert.ToInt16(Math.Pow(Amount, 2));
-            int[] numberCards = new int[Amountx];        // Atm 6x6, manier zoeken om dit te maken zodat gebruiker kiest hoe groot het speelveld is
-            int[] randomarray = random(numberCards);        // Running 'Random' method from below to fix position numbers
+            int topstart = 400;
+            int leftstart = 200;
+            Button start = new Button();
+            this.Controls.Add(start);
+            start.Size = new Size(150, 150);
+            start.Left = leftstart;
+            start.Top = topstart;
+            start.Text = "start";
+            start.BackgroundImageLayout = ImageLayout.Stretch;
+            start.Click += new EventHandler(this.Startbutton_Click);
 
-            int Row = Amount;
-            int Column = Amount;
-            MemoryPanel.RowCount = Row;
-            MemoryPanel.ColumnCount = Column;
-            for (int i = 0; i < (Row); i++)         // Amount of cells, 4rows by 4columns
+        }
+
+        public void CreateComboBox()
+        {
+            ComboBox Speelveld = new ComboBox();
+            
+        }
+
+        public void CreateLayoutPanel()
+        {
+            int Amountx = Convert.ToInt16(Math.Pow(Amount, 2));
+            int[] numberCards = new int[Amountx];       
+            int[] randomarray = random(numberCards);
+            TableLayoutPanel MemoryPanel = new TableLayoutPanel();
+            MemoryPanel.Location = new System.Drawing.Point(26, 12);
+            MemoryPanel.Name = "TableLayoutPanel1";
+            MemoryPanel.Size = new System.Drawing.Size(300,300);
+            MemoryPanel.BackColor = System.Drawing.Color.Black;
+            MemoryPanel.RowCount = Amount;
+            MemoryPanel.ColumnCount = Amount;
+            for (int i = 0; i < (Amount); i++)        
             {
-                MemoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-                MemoryPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+                MemoryPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 12));
+                MemoryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
             }
-            for (int i = 0; i < (Row * Column); i++)        // Amount of buttons      
+            for (int i = 0; i < (Amount * Amount); i++)            
             {
                 var button = new Button();
                 button.Text = Convert.ToString(randomarray[i]);
-                button.Name = Convert.ToString((randomarray[i]));
+                button.Name = Convert.ToString(randomarray[i]);
                 button.Dock = DockStyle.Fill;
                 MemoryPanel.Controls.Add(button);
-                button.Click += new System.EventHandler(button_Click);
+                button.Click += new System.EventHandler(FlipCard);
+
             }
+            MemoryPanel.Visible = true;
+            this.Controls.Add(MemoryPanel);
+        }
+
+
+
+        public void Startbutton_Click(object sender, EventArgs e)
+        {
+            CreateLayoutPanel();
+                       
         }
 
         public static int[] random(int[] array)         // Method to refill the 0,0 array with random non-duplicate numbers between from 1 to 16
@@ -57,7 +93,7 @@ namespace Meme_Ory_Game
                 return randomArray;
             }
 
-        private void button_Click(object sender, EventArgs e)
+        private void FlipCard(object sender, EventArgs e)
         {
                 Button clickedButton = sender as Button;
                 int nummer = Convert.ToInt32(clickedButton.Name);
