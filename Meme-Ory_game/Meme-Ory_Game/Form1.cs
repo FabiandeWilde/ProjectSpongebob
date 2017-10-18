@@ -101,6 +101,7 @@ namespace Meme_Ory_Game
             Speelveld.Size = new Size(100, 100);
             Speelveld.Items.Clear();
             Speelveld.Items.AddRange(new object[] { "4x4", "6x6", "8x8" });
+            Speelveld.SelectedIndex = 0;
         }
 
         public void CreatePlayerCombobox()
@@ -111,6 +112,7 @@ namespace Meme_Ory_Game
             Gamemode.Size = new Size(100, 100);
             Gamemode.Items.Clear();
             Gamemode.Items.AddRange(new object[] { "Singleplayer", "Multiplayer" });
+            Gamemode.SelectedIndex = 0;
         }
 
         public void CreateThemas()
@@ -120,6 +122,7 @@ namespace Meme_Ory_Game
             Thema.Size = new Size(200, 100);
             Thema.Items.Clear();
             Thema.Items.AddRange(new object[] { "Classic", "Dank Memes", "Trippin' Balls", "Grandmother's Favorite" });
+            Thema.SelectedIndex = 0;
         }       // Heeft nog geen werking met combobox input <<< bestaat nu al wel in programma
 
         public void CreateResetButton()
@@ -174,8 +177,8 @@ namespace Meme_Ory_Game
             PlayerName_2.Location = new Point(100, 100);
             PlayerName_1.Size = new Size(100, 50);
             PlayerName_2.Size = new Size(100, 50);
-            PlayerName_1.Text = PlayerTurn.Text;
-            PlayerName_2.Text = PlayerTurn.Text;
+            PlayerName_1.Text = "";
+            PlayerName_2.Text = "";
         }
 
         public void CreatePlayerNameLabel()
@@ -188,6 +191,10 @@ namespace Meme_Ory_Game
             PlayerNameLabel_2.Size = new Size(100, 50);
             PlayerNameLabel_1.Text = PlayerName_1.Text;
             PlayerNameLabel_2.Text = PlayerName_2.Text;
+            if (PlayerNameLabel_1.Text == "")
+                PlayerNameLabel_1.Text = "Player 1";
+            if (PlayerNameLabel_2.Text == "")
+                PlayerNameLabel_2.Text = "Player 2";
         }
 
         public void CreatePlayerScore()
@@ -236,13 +243,14 @@ namespace Meme_Ory_Game
             Thirdstart.Visible = true;
             rules.Visible = false;
             Gamemode.Visible = false;
-            /*if (Gamemode.Text == "Singleplayer")
+            if (Gamemode.Text == "Singleplayer")
             {
                 PlayerName_2.Visible = false;
                 Player2Score.Visible = false;
+                PlayerNameLabel_2.Visible = false;
                 PlayerTurn.Visible = false;
                 player1score = player2score + player1score;
-            }*/
+            }
         }
 
         public void Thirdstart_Click(object sender, EventArgs e)
