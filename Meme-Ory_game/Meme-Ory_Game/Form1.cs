@@ -14,11 +14,17 @@ namespace Meme_Ory_Game
     {
         int Amount;
         ComboBox Speelveld = new ComboBox();
+        ComboBox Gamemode = new ComboBox();
+        ComboBox Thema = new ComboBox();
         Button Start = new Button();
-        Button Secondstart = new Button();
+        Button SecondStart = new Button();
+        Button Thirdstart = new Button();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
         Button firstClicked = null;
         Button secondClicked = null;
+        Button rules = new Button();
+        Button goback = new Button();
+        Label Rules = new Label();
         bool player1beurt = true;
         int player1score = 0;
         int player2score = 0;
@@ -34,15 +40,13 @@ namespace Meme_Ory_Game
         public Form1()
         {
             InitializeComponent();
-            CreateStartbutton();
+            CreateStartButton();
+            CreateRulesButton();
+            CreateGoBackButton();
+            goback.Visible = false;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        public void CreateStartbutton()
+        public void CreateStartButton()
         {
             this.Controls.Add(Start);
             Start.Location = new Point(100, 150);
@@ -51,13 +55,43 @@ namespace Meme_Ory_Game
             Start.Click += new EventHandler(this.Startbutton_Click);
         }
 
-        public void CreateSecondStart()
+        public void CreateSecondStartbutton()
         {
-            this.Controls.Add(Secondstart);
-            Secondstart.Size = new Size(100, 100);
-            Secondstart.Location = new Point(100, 250);
-            Secondstart.Text = "Start Game";
-            Secondstart.Click += new EventHandler(this.Secondstart_Click);
+            this.Controls.Add(SecondStart);
+            SecondStart.Location = new Point(100, 250);
+            SecondStart.Size = new Size(200, 50);
+            SecondStart.Text = "start";
+            SecondStart.Click += new EventHandler(this.SecondStartbutton_Click);
+
+        }
+
+        public void CreateGoBackButton()
+        {
+            this.Controls.Add(goback);
+            goback.Size = new Size(70, 30);
+            goback.Location = new Point(30, 320);
+            goback.Text = "Ga terug";
+            goback.BackgroundImageLayout = ImageLayout.Stretch;
+            goback.Click += new EventHandler(this.GoBackbutton_Click);
+        }
+
+        public void CreateRulesButton()
+        {
+            this.Controls.Add(rules);
+            rules.Size = new Size(150, 150);
+            rules.Location = new Point(200, 50);
+            rules.Text = "Spelregels";
+            rules.BackgroundImageLayout = ImageLayout.Stretch;
+            rules.Click += new EventHandler(this.Rulesbutton_Click);
+        }
+
+        public void CreateThirdStart()
+        {
+            this.Controls.Add(Thirdstart);
+            Thirdstart.Size = new Size(100, 100);
+            Thirdstart.Location = new Point(100, 250);
+            Thirdstart.Text = "Start Game";
+            Thirdstart.Click += new EventHandler(this.Thirdstart_Click);
         }
 
         public void CreateComboBox()
@@ -65,8 +99,28 @@ namespace Meme_Ory_Game
             this.Controls.Add(Speelveld);
             Speelveld.Location = new Point(100, 200);
             Speelveld.Size = new Size(100, 100);
-            Speelveld.Items.AddRange(new object[] { "4x4", "5x5", "6x6", "7x7", "8x8" });
+            Speelveld.Items.Clear();
+            Speelveld.Items.AddRange(new object[] { "4x4", "6x6", "8x8" });
         }
+
+        public void CreatePlayerCombobox()
+        {
+            this.Controls.Add(Gamemode);
+            Gamemode.Location=new Point (100,200);
+            Gamemode.Location = new Point(100, 200);
+            Gamemode.Size = new Size(100, 100);
+            Gamemode.Items.Clear();
+            Gamemode.Items.AddRange(new object[] { "Singleplayer", "Multiplayer" });
+        }
+
+        public void CreateThemas()
+        {
+            this.Controls.Add(Thema);
+            Thema.Location = new Point(250, 110);
+            Thema.Size = new Size(200, 100);
+            Thema.Items.Clear();
+            Thema.Items.AddRange(new object[] { "Classic", "Dank Memes", "Trippin' Balls", "Grandmother's Favorite" });
+        }       // Heeft nog geen werking met combobox input <<< bestaat nu al wel in programma
 
         public void CreateResetButton()
         {
@@ -99,7 +153,7 @@ namespace Meme_Ory_Game
                 MemoryPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
                 MemoryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
             }
-            for (int i = 0; i < (Amount * Amount); i++)
+            for (int i = 0; i < (Amountx); i++)
             {
                 var button = new Button();
                 button.Text = Convert.ToString(randomarray[i]);
@@ -152,13 +206,46 @@ namespace Meme_Ory_Game
 
         public void Startbutton_Click(object sender, EventArgs e)
         {
-            CreateSecondStart();
-            CreateComboBox();
-            CreatePlayerName();
+            CreateSecondStartbutton();
+            CreatePlayerCombobox();
+            MemoryPanel.Visible = false;
             Start.Visible = false;
+            goback.Visible = true;
+            SecondStart.Visible = true;
+            Thirdstart.Visible = false;
+            rules.Visible = false;
+            Speelveld.Visible = false;
+            PlayerName_1.Visible = false;
+            PlayerName_2.Visible = false;
+            Gamemode.Visible = true;
         }
 
-        public void Secondstart_Click(object sender, EventArgs e)
+        public void SecondStartbutton_Click(object sender, EventArgs e)
+        {
+            CreateThirdStart();
+            CreateComboBox();
+            CreatePlayerName();
+            CreateThemas();
+            Thema.Visible = true;
+            Start.Visible = false;
+            goback.Visible = true;
+            Speelveld.Visible = true;
+            PlayerName_1.Visible = true;
+            PlayerName_2.Visible = true;
+            SecondStart.Visible = false;
+            Thirdstart.Visible = true;
+            rules.Visible = false;
+            Gamemode.Visible = false;
+            if (Gamemode.Text == "Singleplayer")
+            {
+                PlayerName_2.Visible = false;
+                Player2Score.Visible = false;
+                PlayerTurn.Visible = false;
+                player1score = player2score + player1score;
+            }
+        }
+
+        public void Thirdstart_Click(object sender, EventArgs e)
         {
             if (Speelveld.Text == "4x4")
                 Amount = 4;
@@ -167,19 +254,49 @@ namespace Meme_Ory_Game
             if (Speelveld.Text == "8x8")
                 Amount = 8;
             Speelveld.Visible = false;
-            Start.Visible = false;
+            Thirdstart.Visible = false;
             PlayerName_1.Visible = false;
             PlayerName_2.Visible = false;
+            goback.Visible = false;
+            Thema.Visible = false;
             PlayerTurn.Text = PlayerName_1.Text + "'s turn";
             CreateLayoutPanel();
             CreatePlayerNameLabel();
             CreatePlayerScore();
             CreateResetButton();
+            MemoryPanel.Visible = true;
+            /*if (SingleMulti.Text=="Singleplayer")
+            {
+                player1score = player1score + player2score;
+            }*/
         }
 
         public void Resetbutton_Click(object sender, EventArgs e)
         {
             CreateLayoutPanel();
+            Player1Score.Text = Convert.ToString(player1score=0);
+            Player2Score.Text = Convert.ToString(player2score=0);     
+        }
+
+        public void Rulesbutton_Click(object sender, EventArgs e)
+        {
+            Start.Visible = false;
+            rules.Visible = false;
+            goback.Visible = true;
+        }
+
+        public void GoBackbutton_Click(object sender, EventArgs e)
+        {
+            Speelveld.Visible = false;
+            Gamemode.Visible = false;
+            Start.Visible = true;
+            rules.Visible = true;
+            goback.Visible = false;
+            SecondStart.Visible = false;
+            Thirdstart.Visible = false;
+            PlayerName_1.Visible = false;
+            PlayerName_2.Visible = false;
+            Thema.Visible = false;
         }
 
         public static int[] random(int[] array)         // Method to refill the 0,0 array with random non-duplicate numbers between from 1 to 16
@@ -340,5 +457,9 @@ namespace Meme_Ory_Game
             }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 } 
