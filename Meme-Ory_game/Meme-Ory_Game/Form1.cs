@@ -209,7 +209,7 @@ namespace Meme_Ory_Game
                 if (Convert.ToInt32(firstClicked.Text) == (Convert.ToInt32(secondClicked.Text) - 1))
                 {
                     if (player1beurt == true) { player1score++; Player1Score.Text = Convert.ToString(player1score); }
-                    else { player2score++; Player1Score.Text = Convert.ToString(player2score); }
+                    else { player2score++; Player2Score.Text = Convert.ToString(player2score); }
 
                     if (player1score + player2score == maxscore - 1) { MessageBox.Show("biatch"); }
                     firstClicked.Enabled = false;
