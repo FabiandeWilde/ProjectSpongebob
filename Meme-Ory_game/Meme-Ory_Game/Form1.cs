@@ -236,13 +236,13 @@ namespace Meme_Ory_Game
             Thirdstart.Visible = true;
             rules.Visible = false;
             Gamemode.Visible = false;
-            if (Gamemode.Text == "Singleplayer")
+            /*if (Gamemode.Text == "Singleplayer")
             {
                 PlayerName_2.Visible = false;
                 Player2Score.Visible = false;
                 PlayerTurn.Visible = false;
                 player1score = player2score + player1score;
-            }
+            }*/
         }
 
         public void Thirdstart_Click(object sender, EventArgs e)
@@ -265,10 +265,6 @@ namespace Meme_Ory_Game
             CreatePlayerScore();
             CreateResetButton();
             MemoryPanel.Visible = true;
-            /*if (SingleMulti.Text=="Singleplayer")
-            {
-                player1score = player1score + player2score;
-            }*/
         }
 
         public void Resetbutton_Click(object sender, EventArgs e)
