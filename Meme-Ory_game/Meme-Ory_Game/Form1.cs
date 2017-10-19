@@ -454,7 +454,7 @@ namespace Meme_Ory_Game
             {
                 File.WriteAllText(path + savefile2, String.Empty);
 
-                File.AppendAllText(savefile2,
+                File.AppendAllText(path + savefile2,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
 
                 foreach (Control x in MemoryPanel.Controls)// saving of the cards
