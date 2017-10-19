@@ -11,6 +11,21 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -80,73 +95,205 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Image_1.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_4.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_5.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_6.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_7.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_8.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_9.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_10.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_11.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_12.bmp" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Resources\b1fv.bmp" />
+    <Content Include="Resources\c01.bmp" />
+    <Content Include="Resources\c13.bmp" />
+    <Content Include="Resources\d01.bmp" />
+    <Content Include="Resources\d011.bmp" />
+    <Content Include="Resources\d02.bmp" />
+    <Content Include="Resources\d021.bmp" />
+    <Content Include="Resources\d03.bmp" />
+    <Content Include="Resources\d031.bmp" />
+    <Content Include="Resources\d04.bmp" />
+    <Content Include="Resources\d041.bmp" />
+    <Content Include="Resources\d05.bmp" />
+    <Content Include="Resources\d051.bmp" />
+    <Content Include="Resources\d06.bmp" />
+    <Content Include="Resources\d061.bmp" />
+    <Content Include="Resources\d07.bmp" />
+    <Content Include="Resources\d071.bmp" />
+    <Content Include="Resources\d08.bmp" />
+    <Content Include="Resources\d081.bmp" />
+    <Content Include="Resources\d09.bmp" />
+    <Content Include="Resources\d10.bmp" />
+    <Content Include="Resources\d11.bmp" />
+    <Content Include="Resources\d12.bmp" />
+    <Content Include="Resources\d13.bmp" />
+    <Content Include="Resources\h01.bmp" />
+    <Content Include="Resources\h13.bmp" />
+    <Content Include="Resources\Image_1.bmp" />
+    <Content Include="Resources\image_10.bmp" />
+    <Content Include="Resources\image_11.bmp" />
+    <Content Include="Resources\image_12.bmp" />
     <None Include="Resources\image_13.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\image_14.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\image_15.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\image_16.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\image_17.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\image_18.bmp" />
+    <Content Include="Resources\image_19.bmp" />
+    <Content Include="Resources\image_2.bmp" />
+    <Content Include="Resources\image_20.bmp" />
+    <Content Include="Resources\image_21.bmp" />
+    <Content Include="Resources\image_22.bmp" />
+    <Content Include="Resources\image_23.bmp" />
+    <None Include="Resources\image_24.bmp" />
+    <None Include="Resources\image_25.bmp" />
+    <None Include="Resources\image_26.bmp" />
+    <None Include="Resources\image_27.bmp" />
+    <None Include="Resources\image_28.bmp" />
+    <None Include="Resources\image_29.bmp" />
+    <Content Include="Resources\image_3.bmp" />
+    <None Include="Resources\image_30.bmp" />
+    <None Include="Resources\image_31.bmp" />
+    <None Include="Resources\image_32.bmp" />
+    <Content Include="Resources\image_4.bmp" />
+    <Content Include="Resources\image_5.bmp" />
+    <Content Include="Resources\image_6.bmp" />
+    <Content Include="Resources\image_7.bmp" />
+    <None Include="Resources\image_8.bmp" />
+    <Content Include="Resources\image_9.bmp" />
+    <Content Include="Resources\jb.bmp" />
+    <Content Include="Resources\jr.bmp" />
+    <Content Include="Resources\Meme_0.jpg" />
+    <Content Include="Resources\Meme_1.jpg" />
+    <Content Include="Resources\Meme_10.jpg" />
+    <Content Include="Resources\Meme_11.jpg" />
+    <Content Include="Resources\Meme_12.jpg" />
+    <Content Include="Resources\Meme_13.jpg" />
+    <Content Include="Resources\Meme_14.jpg" />
+    <Content Include="Resources\Meme_15.jpg" />
+    <Content Include="Resources\Meme_16.jpg" />
+    <Content Include="Resources\Meme_17.jpg" />
+    <Content Include="Resources\Meme_18.jpg" />
+    <Content Include="Resources\Meme_19.jpg" />
+    <Content Include="Resources\Meme_2.jpg" />
+    <Content Include="Resources\Meme_20.jpg" />
+    <Content Include="Resources\Meme_21.jpg" />
+    <Content Include="Resources\Meme_22.jpg" />
+    <Content Include="Resources\Meme_23.jpg" />
+    <Content Include="Resources\Meme_24.jpg" />
+    <Content Include="Resources\Meme_25.jpg" />
+    <Content Include="Resources\Meme_26.jpg" />
+    <Content Include="Resources\Meme_27.jpg" />
+    <Content Include="Resources\Meme_28.jpg" />
+    <Content Include="Resources\Meme_29.jpg" />
+    <Content Include="Resources\Meme_3.jpg" />
+    <Content Include="Resources\Meme_30.jpg" />
+    <Content Include="Resources\Meme_31.jpg" />
+    <Content Include="Resources\Meme_32.jpg" />
+    <Content Include="Resources\Meme_4.jpg" />
+    <Content Include="Resources\Meme_5.jpg" />
+    <Content Include="Resources\Meme_6.jpg" />
+    <Content Include="Resources\Meme_7.jpg" />
+    <Content Include="Resources\Meme_8.jpg" />
+    <Content Include="Resources\Meme_9.jpg" />
+    <Content Include="Resources\nicolas_0.jpg" />
+    <Content Include="Resources\nicolas_1.jpg" />
+    <Content Include="Resources\nicolas_10.jpg" />
+    <Content Include="Resources\nicolas_11.jpg" />
+    <Content Include="Resources\nicolas_12.jpg" />
+    <Content Include="Resources\nicolas_13.jpg" />
+    <Content Include="Resources\nicolas_14.jpg" />
+    <Content Include="Resources\nicolas_15.jpg" />
+    <Content Include="Resources\nicolas_16.jpg" />
+    <Content Include="Resources\nicolas_17.jpg" />
+    <Content Include="Resources\nicolas_18.jpg" />
+    <Content Include="Resources\nicolas_19.jpg" />
+    <Content Include="Resources\nicolas_2.jpg" />
+    <Content Include="Resources\nicolas_20.jpg" />
+    <Content Include="Resources\nicolas_21.jpg" />
+    <Content Include="Resources\nicolas_22.jpg" />
+    <Content Include="Resources\nicolas_23.jpg" />
+    <Content Include="Resources\nicolas_24.jpg" />
+    <Content Include="Resources\nicolas_25.jpg" />
+    <Content Include="Resources\nicolas_26.jpg" />
+    <Content Include="Resources\nicolas_27.jpg" />
+    <Content Include="Resources\nicolas_28.jpg" />
+    <Content Include="Resources\nicolas_29.jpg" />
+    <Content Include="Resources\nicolas_3.jpg" />
+    <Content Include="Resources\nicolas_30.jpg" />
+    <Content Include="Resources\nicolas_31.jpg" />
+    <Content Include="Resources\nicolas_32.jpg" />
+    <Content Include="Resources\nicolas_4.jpg" />
+    <Content Include="Resources\nicolas_5.jpg" />
+    <Content Include="Resources\nicolas_6.jpg" />
+    <Content Include="Resources\nicolas_7.jpg" />
+    <Content Include="Resources\nicolas_8.jpg" />
+    <Content Include="Resources\nicolas_9.jpg" />
+    <Content Include="Resources\s01.bmp" />
+    <Content Include="Resources\s02.bmp" />
+    <Content Include="Resources\s03.bmp" />
+    <Content Include="Resources\s04.bmp" />
+    <Content Include="Resources\s05.bmp" />
+    <Content Include="Resources\s06.bmp" />
+    <Content Include="Resources\s07.bmp" />
+    <Content Include="Resources\s08.bmp" />
+    <Content Include="Resources\s09.bmp" />
+    <Content Include="Resources\s091.bmp" />
+    <Content Include="Resources\s092.bmp" />
+    <Content Include="Resources\s093.bmp" />
+    <Content Include="Resources\s10.bmp" />
+    <Content Include="Resources\s101.bmp" />
+    <Content Include="Resources\s102.bmp" />
+    <Content Include="Resources\s103.bmp" />
+    <Content Include="Resources\s11.bmp" />
+    <Content Include="Resources\s111.bmp" />
+    <Content Include="Resources\s112.bmp" />
+    <Content Include="Resources\s113.bmp" />
+    <Content Include="Resources\s12.bmp" />
+    <Content Include="Resources\s121.bmp" />
+    <Content Include="Resources\s122.bmp" />
+    <Content Include="Resources\s123.bmp" />
+    <Content Include="Resources\s13.bmp" />
+    <Content Include="Resources\s131.bmp" />
+    <Content Include="Resources\s132.bmp" />
+    <Content Include="Resources\s133.bmp" />
+    <Content Include="Resources\spongebob_0.jpg" />
+    <Content Include="Resources\spongebob_1 .jpg" />
+    <Content Include="Resources\spongebob_10.jpg" />
+    <Content Include="Resources\spongebob_11.jpg" />
+    <Content Include="Resources\spongebob_12.jpg" />
+    <Content Include="Resources\spongebob_13.jpg" />
+    <Content Include="Resources\spongebob_14.jpg" />
+    <Content Include="Resources\spongebob_15.jpg" />
+    <Content Include="Resources\spongebob_16.jpg" />
+    <Content Include="Resources\spongebob_17.jpg" />
+    <Content Include="Resources\spongebob_18.jpg" />
+    <Content Include="Resources\spongebob_19.jpg" />
+    <Content Include="Resources\spongebob_2.jpg" />
+    <Content Include="Resources\spongebob_20.jpg" />
+    <Content Include="Resources\spongebob_21.jpg" />
+    <Content Include="Resources\spongebob_22.jpg" />
+    <Content Include="Resources\spongebob_23.jpg" />
+    <Content Include="Resources\spongebob_24.jpg" />
+    <Content Include="Resources\spongebob_25.jpg" />
+    <Content Include="Resources\spongebob_26.jpg" />
+    <Content Include="Resources\spongebob_27.jpg" />
+    <Content Include="Resources\spongebob_28.jpg" />
+    <Content Include="Resources\spongebob_29.jpg" />
+    <Content Include="Resources\spongebob_3.jpg" />
+    <Content Include="Resources\spongebob_30.jpg" />
+    <Content Include="Resources\spongebob_31.jpg" />
+    <Content Include="Resources\spongebob_32.jpg" />
+    <Content Include="Resources\spongebob_4.jpg" />
+    <Content Include="Resources\spongebob_5.jpg" />
+    <Content Include="Resources\spongebob_6.jpg" />
+    <Content Include="Resources\spongebob_7.jpg" />
+    <Content Include="Resources\spongebob_8.jpg" />
+    <Content Include="Resources\spongebob_9.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\image_19.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_20.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_21.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_22.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_23.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_2.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image_3.bmp" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
