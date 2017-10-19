@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Meme_Ory_Game
 {
@@ -42,6 +43,7 @@ namespace Meme_Ory_Game
             InitializeComponent();
             CreateStartButton();
             CreateRulesButton();
+            CreateHighScoreButton();
             CreateGoBackButton();
             goback.Visible = false;
         }
@@ -53,6 +55,138 @@ namespace Meme_Ory_Game
             Start.Size = new Size(200, 50);
             Start.Text = "start";
             Start.Click += new EventHandler(this.Startbutton_Click);
+        }
+
+        public void CreateHighScoreButton()
+        {
+            Button HighScore = new Button();
+            this.Controls.Add(HighScore);
+            HighScore.Location = new Point(100, 250);
+            HighScore.Size = new Size(100, 50);
+            HighScore.Text = "HighScores";
+            HighScore.Click += new EventHandler(this.HighScore_Click);
+        }
+
+        public void CreateListview()
+        {
+            string tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore.txt");
+            string[] scores = tekst.Split(' ');
+            ListView listView1 = new ListView();
+            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(200, 200));
+            listView1.View = View.Details;
+            listView1.AllowColumnReorder = true;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
+            listView1.Sorting = SortOrder.Descending;
+            listView1.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            int x = 0;
+            for (int i = 0; i < (scores.Length - 2); i += 2)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = ""; // 1st column
+                item.SubItems.Add(""); // 2nd column             
+                listView1.Items.Add(item);
+                listView1.Items[x].SubItems[0].Text = scores[(i + 1)]; // 1st value from array
+                listView1.Items[x].SubItems[1].Text = scores[i]; // 2nd value from array                
+                if (i % 2 == 0) x++;
+            }
+            // Create two ImageList objects.
+            ImageList imageListSmall = new ImageList();
+            ImageList imageListLarge = new ImageList();
+            //Assign the ImageList objects to the ListView.
+            listView1.LargeImageList = imageListLarge;
+            listView1.SmallImageList = imageListSmall;
+            // Add the ListView to the control collection.
+            this.Controls.Add(listView1);
+
+            //~~~listview 2
+
+            string tekst2 = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore1.txt");
+            string[] scores2 = tekst2.Split(' ');
+            ListView listView12 = new ListView();
+            listView12.Bounds = new Rectangle(new Point(410, 10), new Size(200, 200));
+            listView12.View = View.Details;
+            listView12.AllowColumnReorder = true;
+            listView12.FullRowSelect = true;
+            listView12.GridLines = true;
+            listView12.Sorting = SortOrder.Descending;
+            listView12.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            listView12.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            int xx = 0;
+            for (int i = 0; i < (scores2.Length - 2); i += 2)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = ""; // 1st column
+                item.SubItems.Add(""); // 2nd column             
+                listView12.Items.Add(item);
+                listView12.Items[xx].SubItems[0].Text = scores2[(i + 1)]; // 1st value from array
+                listView12.Items[xx].SubItems[1].Text = scores2[i]; // 2nd value from array                
+                if (i % 2 == 0) xx++;
+            }
+            // Create two ImageList objects.
+            ImageList imageListSmall2 = new ImageList();
+            ImageList imageListLarge2 = new ImageList();
+            //Assign the ImageList objects to the ListView.
+            listView12.LargeImageList = imageListLarge;
+            listView12.SmallImageList = imageListSmall;
+            // Add the ListView to the control collection.
+            this.Controls.Add(listView12);
+
+            //~~~~ liestview 3
+            string tekst3 = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore2.txt");
+            string[] scores3 = tekst3.Split(' ');
+            ListView listView13 = new ListView();
+            listView13.Bounds = new Rectangle(new Point(610, 10), new Size(200, 200));
+            listView13.View = View.Details;
+            listView13.AllowColumnReorder = true;
+            listView13.FullRowSelect = true;
+            listView13.GridLines = true;
+            listView13.Sorting = SortOrder.Descending;
+            listView13.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            listView13.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            int xxx = 0;
+            for (int i = 0; i < (scores3.Length - 2); i += 2)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = ""; // 1st column
+                item.SubItems.Add(""); // 2nd column             
+                listView13.Items.Add(item);
+                listView13.Items[xxx].SubItems[0].Text = scores3[(i + 1)]; // 1st value from array
+                listView13.Items[xxx].SubItems[1].Text = scores3[i]; // 2nd value from array                
+                if (i % 2 == 0) xxx++;
+            }
+            // Create two ImageList objects.
+            ImageList imageListSmall3 = new ImageList();
+            ImageList imageListLarge3 = new ImageList();
+            //Assign the ImageList objects to the ListView.
+            listView13.LargeImageList = imageListLarge;
+            listView13.SmallImageList = imageListSmall;
+            // Add the ListView to the control collection.
+            this.Controls.Add(listView13);
+
+        }       // 
+
+        public void CreateContinueSaveButton()
+        {
+            Button Continue = new Button();
+            Button Save = new Button();
+
+            Save.Location = new Point(0, 150);
+            Save.Size = new Size(80, 50);
+            Save.Text = "save";
+            Save.Click += new EventHandler(this.SaveButton_Click);
+
+            Continue.Location = new Point(0, 200);
+            Continue.Size = new Size(80, 50);
+            Continue.Text = "Continue";
+            Continue.Click += new EventHandler(this.ContinueButton_Click);
+
+            this.Controls.Add(Save);
+            this.Controls.Add(Continue);
         }
 
         public void CreateSecondStartbutton()
@@ -192,9 +326,15 @@ namespace Meme_Ory_Game
             PlayerNameLabel_1.Text = PlayerName_1.Text;
             PlayerNameLabel_2.Text = PlayerName_2.Text;
             if (PlayerNameLabel_1.Text == "")
+            {
                 PlayerNameLabel_1.Text = "Player 1";
+                PlayerName_1.Text = "Player 1";
+            }
             if (PlayerNameLabel_2.Text == "")
+            {
                 PlayerNameLabel_2.Text = "Player 2";
+                PlayerName_2.Text = "Player 2";
+            }
         }
 
         public void CreatePlayerScore()
@@ -209,6 +349,134 @@ namespace Meme_Ory_Game
             PlayerTurn.Location = new Point(30, 120);
             Player1Score.Size = new Size(30,30);
             Player2Score.Size = new Size(30, 30);
+        }
+
+        public void ContinueButton_Click(object sender, EventArgs e)
+        {
+            string tekst = " ";
+            if (Amount == 4) { tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt"); }
+            if (Amount == 6) { tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt"); }
+            if (Amount == 8) { tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt"); }
+
+
+            string[] scores = tekst.Split(' ');
+            PlayerNameLabel_1.Text = scores[0];
+            player1score = Convert.ToInt32(scores[1]);
+            Player1Score.Text = scores[1];
+            PlayerNameLabel_2.Text = scores[2];
+            player2score = Convert.ToInt32(scores[3]);
+            Player2Score.Text = scores[3];
+            player1beurt = Convert.ToBoolean(scores[4]);
+            PlayerTurn.Text = scores[5];
+            int teller = 7;
+            int trueteller = 8;
+
+            foreach (Control x in MemoryPanel.Controls)
+            {
+                if (x is Button)
+                {
+                    x.Text = scores[teller];//essential
+                    teller += 2;//essential
+                    x.Enabled = Convert.ToBoolean(scores[trueteller]);// change to enable 
+                    if (x.Enabled == false)
+                    {
+                        int nummer = Convert.ToInt32(x.Name);
+                        (x as Button).Image = KrijgImage(nummer);
+                    }
+                    trueteller += 2;
+                }
+            }
+        }
+
+        public void SaveButton_Click(object sender, EventArgs e)
+        {
+            // variables to be saved:
+            // player names ~~ player scores ~~ turn scores ~~ player's turn name ~~ field tiles ~~ timer(singelplayer)
+            //PictureBox vergelijker = new PictureBox();
+            //vergelijker.Image = Properties.Resources._0;
+            if (Amount == 4)
+            {
+                File.WriteAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt", String.Empty);
+
+                File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
+
+                foreach (Control x in MemoryPanel.Controls)// saving of the cards
+                {
+                    if (x is Button)
+                    {
+                        File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                        Convert.ToString(x.Text) + " ");
+                        if (((x as Button).Enabled) == false)
+                        {
+                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                             "false" + " ");
+                        }
+                        else
+                        {
+                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                            "true" + " ");
+                        }
+                    }
+                }
+            }
+            if (Amount == 6)
+            {
+                File.WriteAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt", String.Empty);
+
+                File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
+
+                foreach (Control x in MemoryPanel.Controls)// saving of the cards
+                {
+                    if (x is Button)
+                    {
+                        File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                        Convert.ToString(x.Text) + " ");
+                        if (((x as Button).Enabled) == false)
+                        {
+                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                             "false" + " ");
+                        }
+                        else
+                        {
+                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                            "true" + " ");
+                        }
+                    }
+                }
+            }
+            if (Amount == 8)
+            {
+                File.WriteAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt", String.Empty);
+
+                File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
+
+                foreach (Control x in MemoryPanel.Controls)// saving of the cards
+                {
+                    if (x is Button)
+                    {
+                        File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                        Convert.ToString(x.Text) + " ");
+                        if (((x as Button).Enabled) == false)
+                        {
+                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                             "false" + " ");
+                        }
+                        else
+                        {
+                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                            "true" + " ");
+                        }
+                    }
+                }
+            }
+        } // 
+
+        public void HighScore_Click(object sender, EventArgs e)
+        {
+            CreateListview();
         }
 
         public void Startbutton_Click(object sender, EventArgs e)
@@ -266,13 +534,13 @@ namespace Meme_Ory_Game
             PlayerName_1.Visible = false;
             PlayerName_2.Visible = false;
             goback.Visible = false;
-            Thema.Visible = false;
-            PlayerTurn.Text = PlayerName_1.Text + "'s turn";
+            Thema.Visible = false;   
             CreateLayoutPanel();
             CreatePlayerNameLabel();
             CreatePlayerScore();
             CreateResetButton();
             MemoryPanel.Visible = true;
+            PlayerTurn.Text = PlayerName_1.Text + "'s turn";
         }
 
         public void Resetbutton_Click(object sender, EventArgs e)
@@ -311,6 +579,42 @@ namespace Meme_Ory_Game
             return randomArray;
         }
 
+        public void Victory()
+        {
+            if (player1score > player2score)
+            {
+                if (Amount == 4)
+                {
+                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore.txt", (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
+                }
+                if (Amount == 6)
+                {
+                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore1.txt", (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
+                }
+                if (Amount == 8)
+                {
+                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore2.txt", (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
+                }
+                MessageBox.Show(PlayerNameLabel_1.Text);
+            }
+            else
+            {
+                if (Amount == 4)
+                {
+                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore.txt", (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                }
+                if (Amount == 6)
+                {
+                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore1.txt", (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                }
+                if (Amount == 8)
+                {
+                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore2.txt", (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                }
+                MessageBox.Show(PlayerNameLabel_2.Text);
+            }
+        }
+
         public async void FlipCard(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -332,7 +636,7 @@ namespace Meme_Ory_Game
                     if (player1beurt == true) { player1score++; Player1Score.Text = Convert.ToString(player1score); }
                     else { player2score++; Player2Score.Text = Convert.ToString(player2score); }
 
-                    if (player1score + player2score == maxscore - 1) { MessageBox.Show("biatch"); }
+                    if (player1score + player2score == maxscore - 1) { Victory(); }
                     firstClicked.Enabled = false;
                     secondClicked.Enabled = false;
                     firstClicked = null;
@@ -363,7 +667,7 @@ namespace Meme_Ory_Game
                     {
                         player2score++; Player2Score.Text = Convert.ToString(player2score);
                     }
-                    if (player1score + player2score == maxscore - 1) { MessageBox.Show("biatch"); }
+                    if (player1score + player2score == maxscore - 1) { Victory(); }
                     firstClicked.Enabled = false;
                     firstClicked.Enabled = false;
                     firstClicked = null;
