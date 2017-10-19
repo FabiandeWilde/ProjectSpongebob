@@ -428,7 +428,7 @@ namespace Meme_Ory_Game
             {
                 File.WriteAllText(savefile1, String.Empty);
 
-                File.AppendAllText(savefile1,
+                File.AppendAllText(path + savefile1,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
 
                 foreach (Control x in MemoryPanel.Controls)// saving of the cards
@@ -452,7 +452,7 @@ namespace Meme_Ory_Game
             }
             if (Amount == 6)
             {
-                File.WriteAllText(savefile2, String.Empty);
+                File.WriteAllText(path + savefile2, String.Empty);
 
                 File.AppendAllText(savefile2,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
@@ -461,16 +461,16 @@ namespace Meme_Ory_Game
                 {
                     if (x is Button)
                     {
-                        File.AppendAllText(savefile2,
+                        File.AppendAllText(path + savefile2,
                         Convert.ToString(x.Text) + " ");
                         if (((x as Button).Enabled) == false)
                         {
-                            File.AppendAllText(savefile2,
+                            File.AppendAllText(path + savefile2,
                              "false" + " ");
                         }
                         else
                         {
-                            File.AppendAllText(savefile2,
+                            File.AppendAllText(path + savefile2,
                             "true" + " ");
                         }
                     }
@@ -478,25 +478,25 @@ namespace Meme_Ory_Game
             }
             if (Amount == 8)
             {
-                File.WriteAllText(savefile3, String.Empty);
+                File.WriteAllText(path + savefile3, String.Empty);
 
-                File.AppendAllText(savefile3,
+                File.AppendAllText(path + savefile3,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
 
                 foreach (Control x in MemoryPanel.Controls)// saving of the cards
                 {
                     if (x is Button)
                     {
-                        File.AppendAllText(savefile3,
+                        File.AppendAllText(path + savefile3,
                         Convert.ToString(x.Text) + " ");
                         if (((x as Button).Enabled) == false)
                         {
-                            File.AppendAllText(savefile3,
+                            File.AppendAllText(path + savefile3,
                              "false" + " ");
                         }
                         else
                         {
-                            File.AppendAllText(savefile3,
+                            File.AppendAllText(path + savefile3,
                             "true" + " ");
                         }
                     }
@@ -633,15 +633,15 @@ namespace Meme_Ory_Game
             {
                 if (Amount == 4)
                 {
-                    File.AppendAllText(HighScore, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
                 }
                 if (Amount == 6)
                 {
-                    File.AppendAllText(HighScore1, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore1, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
                 }
                 if (Amount == 8)
                 {
-                    File.AppendAllText(HighScore2, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore2, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
                 }
                 MessageBox.Show(PlayerNameLabel_2.Text);
             }
