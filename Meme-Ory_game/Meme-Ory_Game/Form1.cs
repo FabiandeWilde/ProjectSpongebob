@@ -100,7 +100,7 @@ namespace Meme_Ory_Game
             int Amountx = Convert.ToInt32(Amount * Amount);
             int[] randomarray = random(Amountx);
             MemoryPanel.Location = new System.Drawing.Point(200, 10);
-            MemoryPanel.Size = new System.Drawing.Size(300, 300);
+            MemoryPanel.Size = new System.Drawing.Size(600, 600);
             MemoryPanel.RowCount = Amount;
             MemoryPanel.ColumnCount = Amount;
             for (int i = 0; i < (Amount); i++)
@@ -228,10 +228,6 @@ namespace Meme_Ory_Game
             {
                 clickedButton.BackgroundImage = speelkaarten(nummer);
             }
-
-
-
-
             clickedButton.BackgroundImageLayout = ImageLayout.Stretch;
             if (firstClicked == null)// filling 1st comparer
             {
@@ -248,7 +244,7 @@ namespace Meme_Ory_Game
                     if (player1beurt == true) { player1score++; Player1Score.Text = Convert.ToString(player1score); }
                     else { player2score++; Player1Score.Text = Convert.ToString(player2score); }
 
-                    if (player1score + player2score == maxscore - 1) { MessageBox.Show("biatch"); }
+                    if (player1score + player2score == maxscore - 1) { MessageBox.Show (PlayerName_1.Text + " won this game with " + player1score + " to " + player2score); }
                     firstClicked.Enabled = false;
                     secondClicked.Enabled = false;
                     firstClicked = null;
@@ -279,7 +275,8 @@ namespace Meme_Ory_Game
                     {
                         player2score++; Player2Score.Text = Convert.ToString(player2score);
                     }
-                    if (player1score + player2score == maxscore - 1) { MessageBox.Show("biatch"); }
+                    if (player1score + player2score == maxscore - 1){MessageBox.Show(PlayerName_2.Text + " won this game with " + player2score + " to " + player1score);}
+                    
                     firstClicked.Enabled = false;
                     firstClicked.Enabled = false;
                     firstClicked = null;
@@ -328,7 +325,6 @@ namespace Meme_Ory_Game
             
 
         }
-
         public static Image speelkaarten(int nummer)
         {
             int nummer2 = nummer / 2;
