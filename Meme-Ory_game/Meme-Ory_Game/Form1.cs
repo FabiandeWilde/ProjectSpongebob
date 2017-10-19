@@ -17,6 +17,7 @@ namespace Meme_Ory_Game
         ComboBox Speelveld = new ComboBox();
         ComboBox Gamemode = new ComboBox();
         ComboBox Thema = new ComboBox();
+        string thema;
         Button Start = new Button();
         Button SecondStart = new Button();
         Button Thirdstart = new Button();
@@ -37,6 +38,13 @@ namespace Meme_Ory_Game
         Label PlayerNameLabel_2 = new Label();
         Label PlayerTurn = new Label();
         int maxscore = 0;
+        string path = System.AppDomain.CurrentDomain.BaseDirectory;
+        string savefile1 = "Save1.txt";
+        string savefile2 = "Save2.txt";
+        string savefile3 = "Save3.txt";
+        string HighScore = "HighScore.txt";
+        string HighScore1 = "HighScore1.txt";
+        string HighScore2 = "HighScore2.txt";
 
         public Form1()
         {
@@ -69,7 +77,7 @@ namespace Meme_Ory_Game
 
         public void CreateListview()
         {
-            string tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore.txt");
+            string tekst = File.ReadAllText(path + HighScore);
             string[] scores = tekst.Split(' ');
             ListView listView1 = new ListView();
             listView1.Bounds = new Rectangle(new Point(10, 10), new Size(200, 200));
@@ -103,7 +111,7 @@ namespace Meme_Ory_Game
 
             //~~~listview 2
 
-            string tekst2 = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore1.txt");
+            string tekst2 = File.ReadAllText(path + HighScore1);
             string[] scores2 = tekst2.Split(' ');
             ListView listView12 = new ListView();
             listView12.Bounds = new Rectangle(new Point(410, 10), new Size(200, 200));
@@ -136,7 +144,7 @@ namespace Meme_Ory_Game
             this.Controls.Add(listView12);
 
             //~~~~ liestview 3
-            string tekst3 = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore2.txt");
+            string tekst3 = File.ReadAllText(path + HighScore2);
             string[] scores3 = tekst3.Split(' ');
             ListView listView13 = new ListView();
             listView13.Bounds = new Rectangle(new Point(610, 10), new Size(200, 200));
@@ -255,9 +263,9 @@ namespace Meme_Ory_Game
             Thema.Location = new Point(250, 110);
             Thema.Size = new Size(200, 100);
             Thema.Items.Clear();
-            Thema.Items.AddRange(new object[] { "Classic", "Dank Memes", "Trippin' Balls", "Grandmother's Favorite" });
+            Thema.Items.AddRange(new object[] { "speelkaarten", "meme", "cage", "spongebob" });
             Thema.SelectedIndex = 0;
-        }       // Heeft nog geen werking met combobox input <<< bestaat nu al wel in programma
+        }      
 
         public void CreateResetButton()
         {
@@ -278,11 +286,11 @@ namespace Meme_Ory_Game
             MemoryPanel.Controls.Clear();
             MemoryPanel.RowStyles.Clear();
             MemoryPanel.ColumnStyles.Clear();
-            int Amountx = Convert.ToInt16(Math.Pow(Amount, 2));
+            int Amountx = Convert.ToInt32(Amount * Amount);
             int[] numberCards = new int[Amountx];
             int[] randomarray = random(numberCards);
             MemoryPanel.Location = new System.Drawing.Point(200, 10);
-            MemoryPanel.Size = new System.Drawing.Size(300, 300);
+            MemoryPanel.Size = new System.Drawing.Size(600, 600);
             MemoryPanel.RowCount = Amount;
             MemoryPanel.ColumnCount = Amount;
             for (int i = 0; i < (Amount); i++)
@@ -295,6 +303,8 @@ namespace Meme_Ory_Game
                 var button = new Button();
                 button.Text = Convert.ToString(randomarray[i]);
                 button.Name = Convert.ToString(randomarray[i]);
+                button.BackgroundImage = achtergrond(thema);
+                button.BackgroundImageLayout = ImageLayout.Stretch;
                 button.Dock = DockStyle.Fill;
                 MemoryPanel.Controls.Add(button);
                 button.Click += new System.EventHandler(FlipCard);
@@ -354,9 +364,9 @@ namespace Meme_Ory_Game
         public void ContinueButton_Click(object sender, EventArgs e)
         {
             string tekst = " ";
-            if (Amount == 4) { tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt"); }
-            if (Amount == 6) { tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt"); }
-            if (Amount == 8) { tekst = File.ReadAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt"); }
+            if (Amount == 4) { tekst = File.ReadAllText(savefile1); }
+            if (Amount == 6) { tekst = File.ReadAllText(savefile2); }
+            if (Amount == 8) { tekst = File.ReadAllText(savefile3); }
 
 
             string[] scores = tekst.Split(' ');
@@ -381,7 +391,27 @@ namespace Meme_Ory_Game
                     if (x.Enabled == false)
                     {
                         int nummer = Convert.ToInt32(x.Name);
-                        (x as Button).Image = KrijgImage(nummer);
+                        if (Thema.Text == "spongebob")
+                        {
+                            nummer = Convert.ToInt32(x.Name);
+                            (x as Button).Image = spongebob(nummer); 
+                        }
+                        if (Thema.Text == "meme")
+                        {
+                            nummer = Convert.ToInt32(x.Name);
+                            (x as Button).Image = meme(nummer);
+                        }
+                        if (Thema.Text == "cage")
+                        {
+                            nummer = Convert.ToInt32(x.Name);
+                            (x as Button).Image = cage(nummer);
+                        }
+                        if (Thema.Text == "speelkaarten")
+                        {
+                            nummer = Convert.ToInt32(x.Name);
+                            (x as Button).Image = speelkaarten(nummer);
+                        }
+                       
                     }
                     trueteller += 2;
                 }
@@ -396,25 +426,25 @@ namespace Meme_Ory_Game
             //vergelijker.Image = Properties.Resources._0;
             if (Amount == 4)
             {
-                File.WriteAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt", String.Empty);
+                File.WriteAllText(savefile1, String.Empty);
 
-                File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                File.AppendAllText(path + savefile1,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
 
                 foreach (Control x in MemoryPanel.Controls)// saving of the cards
                 {
                     if (x is Button)
                     {
-                        File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                        File.AppendAllText(savefile1,
                         Convert.ToString(x.Text) + " ");
                         if (((x as Button).Enabled) == false)
                         {
-                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                            File.AppendAllText(savefile1,
                              "false" + " ");
                         }
                         else
                         {
-                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save1.txt",
+                            File.AppendAllText(savefile1,
                             "true" + " ");
                         }
                     }
@@ -422,25 +452,25 @@ namespace Meme_Ory_Game
             }
             if (Amount == 6)
             {
-                File.WriteAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt", String.Empty);
+                File.WriteAllText(path + savefile2, String.Empty);
 
-                File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                File.AppendAllText(path + savefile2,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
 
                 foreach (Control x in MemoryPanel.Controls)// saving of the cards
                 {
                     if (x is Button)
                     {
-                        File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                        File.AppendAllText(path + savefile2,
                         Convert.ToString(x.Text) + " ");
                         if (((x as Button).Enabled) == false)
                         {
-                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                            File.AppendAllText(path + savefile2,
                              "false" + " ");
                         }
                         else
                         {
-                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save2.txt",
+                            File.AppendAllText(path + savefile2,
                             "true" + " ");
                         }
                     }
@@ -448,31 +478,31 @@ namespace Meme_Ory_Game
             }
             if (Amount == 8)
             {
-                File.WriteAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt", String.Empty);
+                File.WriteAllText(path + savefile3, String.Empty);
 
-                File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                File.AppendAllText(path + savefile3,
                 (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
 
                 foreach (Control x in MemoryPanel.Controls)// saving of the cards
                 {
                     if (x is Button)
                     {
-                        File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                        File.AppendAllText(path + savefile3,
                         Convert.ToString(x.Text) + " ");
                         if (((x as Button).Enabled) == false)
                         {
-                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                            File.AppendAllText(path + savefile3,
                              "false" + " ");
                         }
                         else
                         {
-                            File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\Save3.txt",
+                            File.AppendAllText(path + savefile3,
                             "true" + " ");
                         }
                     }
                 }
             }
-        } // 
+        } ///////////// 
 
         public void HighScore_Click(object sender, EventArgs e)
         {
@@ -529,6 +559,7 @@ namespace Meme_Ory_Game
                 Amount = 6;
             if (Speelveld.Text == "8x8")
                 Amount = 8;
+            thema = Thema.Text;
             Speelveld.Visible = false;
             Thirdstart.Visible = false;
             PlayerName_1.Visible = false;
@@ -539,6 +570,7 @@ namespace Meme_Ory_Game
             CreatePlayerNameLabel();
             CreatePlayerScore();
             CreateResetButton();
+            CreateContinueSaveButton();
             MemoryPanel.Visible = true;
             PlayerTurn.Text = PlayerName_1.Text + "'s turn";
         }
@@ -583,17 +615,17 @@ namespace Meme_Ory_Game
         {
             if (player1score > player2score)
             {
-                if (Amount == 4)
+                if (Amount == 4)  
                 {
-                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore.txt", (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore, (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
                 }
                 if (Amount == 6)
                 {
-                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore1.txt", (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore1, (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
                 }
                 if (Amount == 8)
                 {
-                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore2.txt", (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore2, (PlayerName_1.Text + " " + player1score + " " + Environment.NewLine));
                 }
                 MessageBox.Show(PlayerNameLabel_1.Text);
             }
@@ -601,15 +633,15 @@ namespace Meme_Ory_Game
             {
                 if (Amount == 4)
                 {
-                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore.txt", (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
                 }
                 if (Amount == 6)
                 {
-                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore1.txt", (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore1, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
                 }
                 if (Amount == 8)
                 {
-                    File.AppendAllText("C:\\Users\\Eigenaar\\Desktop\\studie\\project1\\Meme-Ory_Game\\Resources\\HighScore2.txt", (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
+                    File.AppendAllText(path + HighScore2, (PlayerName_2.Text + " " + player2score + " " + Environment.NewLine));
                 }
                 MessageBox.Show(PlayerNameLabel_2.Text);
             }
@@ -619,7 +651,24 @@ namespace Meme_Ory_Game
         {
             Button clickedButton = sender as Button;
             int nummer = Convert.ToInt32(clickedButton.Name);
-            clickedButton.Image = KrijgImage(nummer); //nummer = naam van button = het nummer uit de random array.
+            if (Thema.Text == "spongebob")
+            {
+                clickedButton.BackgroundImage = spongebob(nummer);
+            }
+            if (Thema.Text == "meme")
+            {
+                clickedButton.BackgroundImage = meme(nummer);
+            }
+            if (Thema.Text == "cage")
+            {
+                clickedButton.BackgroundImage = cage(nummer);
+            }
+            if (Thema.Text == "speelkaarten")
+            {
+                clickedButton.BackgroundImage = speelkaarten(nummer);
+            }
+            clickedButton.BackgroundImageLayout = ImageLayout.Stretch;
+
 
             if (firstClicked == null)// filling 1st comparer
             {
@@ -648,8 +697,8 @@ namespace Meme_Ory_Game
                     if (player1beurt == true) { player1beurt = false; PlayerTurn.Text = PlayerName_2.Text + "'s turn"; }
                     else { player1beurt = true; PlayerTurn.Text = PlayerName_1.Text + "'s turn"; }
                     await Task.Delay(500);
-                    firstClicked.Image = Properties.Resources.image_1;
-                    secondClicked.Image = Properties.Resources.image_1;
+                    firstClicked.BackgroundImage = achtergrond(thema);
+                    secondClicked.BackgroundImage = achtergrond(thema);
                     firstClicked = null;
                     secondClicked = null;
                     return;
@@ -679,90 +728,218 @@ namespace Meme_Ory_Game
                     if (player1beurt == true) { player1beurt = false; PlayerTurn.Text = PlayerName_2.Text + "'s turn"; }
                     else { player1beurt = true; PlayerTurn.Text = PlayerName_1.Text + "'s turn"; }
                     await Task.Delay(500);
-                    firstClicked.Image = Properties.Resources.image_1;
-                    secondClicked.Image = Properties.Resources.image_1;
+                    firstClicked.BackgroundImage = achtergrond(thema);
+                    secondClicked.BackgroundImage = achtergrond(thema);
                     firstClicked = null;
                     secondClicked = null;
                     return;
                 }
             }
-        } 
+        }
 
-        public static Image KrijgImage(int nummer) //Method voor de BackgroundImage
+        public static Image achtergrond(string thema)
         {
-            switch (nummer)
-            {
-                //elk paar krijgt dezelfde achtergrond via button_Click
-                //moet langer worden voor grotere spellen dan 4x4
-                case 1:
-                case 2:
-                    Image image1 = Properties.Resources.image_1;
-                    return image1;
-                case 3:
-                case 4:
-                    Image image2 = Properties.Resources.image_2;
-                    return image2;
-                case 5:
-                case 6:
-                    Image image3 = Properties.Resources.image_3;
-                    return image3;
-                case 7:
-                case 8:
-                    Image image4 = Properties.Resources.image_4;
-                    return image4;
-                case 9:
-                case 10:
-                    Image image5 = Properties.Resources.image_5;
-                    return image5;
-                case 11:
-                case 12:
-                    Image image6 = Properties.Resources.image_6;
-                    return image6;
-                case 13:
-                case 14:
-                    Image image7 = Properties.Resources.image_7;
-                    return image7;
-                case 15:
-                case 16:
-                    Image image8 = Properties.Resources.image_8;
-                    return image8;
-                case 17:
-                case 18:
-                    Image image9 = Properties.Resources.image_9;
-                    return image9;
-                case 19:
-                case 20:
-                    Image image10 = Properties.Resources.image_10;
-                    return image10;
-                case 21:
-                case 22:
-                    Image image11 = Properties.Resources.image_11;
-                    return image11;
-                case 23:
-                case 24:
-                    Image image12 = Properties.Resources.image_12;
-                    return image12;
-                case 25:
-                case 26:
-                    Image image13 = Properties.Resources.image_13;
-                    return image13;
-                case 27:
-                case 28:
-                    Image image14 = Properties.Resources.image_14;
-                    return image14;
-                case 29:
-                case 30:
-                    Image image15 = Properties.Resources.image_15;
-                    return image15;
-                case 31:
-                case 32:
-                    Image image16 = Properties.Resources.image_16;
-                    return image16;
 
-                default:
-                    Image dickbutt = null;
-                    return dickbutt;
+            if (thema== "cage")
+            {
+                Image keuze = Properties.Resources.nicolas_0;
+                return keuze;
             }
+            else if (thema == "spongebob")
+            {
+                Image keuze = Properties.Resources.spongebob_0;
+                return keuze;
+            }
+
+            else if (thema == "meme")
+            {
+                Image keuze = Properties.Resources.Meme_0;
+                return keuze;
+            }
+
+            else //if (themakeuze == "speelkaarten")
+            {
+                Image keuze = Properties.Resources.image_0;
+                return keuze;
+            }
+
+        }
+
+        public static Image speelkaarten(int nummer)
+        {
+            int nummer2 = nummer / 2;
+            if (nummer % 2 != 0)
+            {
+                nummer2 = (nummer + 1) / 2;
+            }
+
+            List<Image> i01 = new List<Image>();
+            i01.Add(Properties.Resources.image_1);
+            i01.Add(Properties.Resources.image_2);
+            i01.Add(Properties.Resources.image_3);
+            i01.Add(Properties.Resources.image_4);
+            i01.Add(Properties.Resources.image_5);
+            i01.Add(Properties.Resources.image_6);
+            i01.Add(Properties.Resources.image_7);
+            i01.Add(Properties.Resources.image_8);
+            i01.Add(Properties.Resources.image_9);
+            i01.Add(Properties.Resources.image_10);
+            i01.Add(Properties.Resources.image_11);
+            i01.Add(Properties.Resources.image_12);
+            i01.Add(Properties.Resources.image_13);
+            i01.Add(Properties.Resources.image_14);
+            i01.Add(Properties.Resources.image_15);
+            i01.Add(Properties.Resources.image_16);
+            i01.Add(Properties.Resources.image_17);
+            i01.Add(Properties.Resources.image_18);
+            i01.Add(Properties.Resources.image_19);
+            i01.Add(Properties.Resources.image_20);
+            i01.Add(Properties.Resources.image_21);
+            i01.Add(Properties.Resources.image_22);
+            i01.Add(Properties.Resources.image_23);
+            i01.Add(Properties.Resources.image_24);
+            i01.Add(Properties.Resources.image_25);
+            i01.Add(Properties.Resources.image_26);
+            i01.Add(Properties.Resources.image_27);
+            i01.Add(Properties.Resources.image_28);
+            i01.Add(Properties.Resources.image_29);
+            i01.Add(Properties.Resources.image_30);
+            i01.Add(Properties.Resources.image_31);
+            i01.Add(Properties.Resources.image_32);
+            Image plaatje = i01[nummer2 - 1];
+            return plaatje;
+        }
+        public static Image spongebob(int nummer)
+        {
+            int nummer2 = nummer / 2;
+            if (nummer % 2 != 0)
+            {
+                nummer2 = (nummer + 1) / 2;
+            }
+
+            List<Image> b01 = new List<Image>();
+            b01.Add(Properties.Resources.spongebob_1);
+            b01.Add(Properties.Resources.spongebob_2);
+            b01.Add(Properties.Resources.spongebob_3);
+            b01.Add(Properties.Resources.spongebob_4);
+            b01.Add(Properties.Resources.spongebob_5);
+            b01.Add(Properties.Resources.spongebob_6);
+            b01.Add(Properties.Resources.spongebob_7);
+            b01.Add(Properties.Resources.spongebob_8);
+            b01.Add(Properties.Resources.spongebob_9);
+            b01.Add(Properties.Resources.spongebob_10);
+            b01.Add(Properties.Resources.spongebob_11);
+            b01.Add(Properties.Resources.spongebob_12);
+            b01.Add(Properties.Resources.spongebob_13);
+            b01.Add(Properties.Resources.spongebob_14);
+            b01.Add(Properties.Resources.spongebob_15);
+            b01.Add(Properties.Resources.spongebob_16);
+            b01.Add(Properties.Resources.spongebob_17);
+            b01.Add(Properties.Resources.spongebob_18);
+            b01.Add(Properties.Resources.spongebob_19);
+            b01.Add(Properties.Resources.spongebob_20);
+            b01.Add(Properties.Resources.spongebob_21);
+            b01.Add(Properties.Resources.spongebob_22);
+            b01.Add(Properties.Resources.spongebob_23);
+            b01.Add(Properties.Resources.spongebob_24);
+            b01.Add(Properties.Resources.spongebob_25);
+            b01.Add(Properties.Resources.spongebob_26);
+            b01.Add(Properties.Resources.spongebob_27);
+            b01.Add(Properties.Resources.spongebob_28);
+            b01.Add(Properties.Resources.spongebob_29);
+            b01.Add(Properties.Resources.spongebob_30);
+            b01.Add(Properties.Resources.spongebob_31);
+            b01.Add(Properties.Resources.spongebob_32);
+            Image plaatje = b01[nummer2 - 1];
+            return plaatje;
+        }
+        public static Image cage(int nummer)
+        {
+            int nummer2 = nummer / 2;
+            if (nummer % 2 != 0)
+            {
+                nummer2 = (nummer + 1) / 2;
+            }
+
+            List<Image> a01 = new List<Image>();
+            a01.Add(Properties.Resources.nicolas_1);
+            a01.Add(Properties.Resources.nicolas_2);
+            a01.Add(Properties.Resources.nicolas_3);
+            a01.Add(Properties.Resources.nicolas_4);
+            a01.Add(Properties.Resources.nicolas_5);
+            a01.Add(Properties.Resources.nicolas_6);
+            a01.Add(Properties.Resources.nicolas_7);
+            a01.Add(Properties.Resources.nicolas_8);
+            a01.Add(Properties.Resources.nicolas_9);
+            a01.Add(Properties.Resources.nicolas_10);
+            a01.Add(Properties.Resources.nicolas_11);
+            a01.Add(Properties.Resources.nicolas_12);
+            a01.Add(Properties.Resources.nicolas_13);
+            a01.Add(Properties.Resources.nicolas_14);
+            a01.Add(Properties.Resources.nicolas_15);
+            a01.Add(Properties.Resources.nicolas_16);
+            a01.Add(Properties.Resources.nicolas_17);
+            a01.Add(Properties.Resources.nicolas_18);
+            a01.Add(Properties.Resources.nicolas_19);
+            a01.Add(Properties.Resources.nicolas_20);
+            a01.Add(Properties.Resources.nicolas_21);
+            a01.Add(Properties.Resources.nicolas_22);
+            a01.Add(Properties.Resources.nicolas_23);
+            a01.Add(Properties.Resources.nicolas_24);
+            a01.Add(Properties.Resources.nicolas_25);
+            a01.Add(Properties.Resources.nicolas_26);
+            a01.Add(Properties.Resources.nicolas_27);
+            a01.Add(Properties.Resources.nicolas_28);
+            a01.Add(Properties.Resources.nicolas_29);
+            a01.Add(Properties.Resources.nicolas_30);
+            a01.Add(Properties.Resources.nicolas_31);
+            a01.Add(Properties.Resources.nicolas_32);
+            Image plaatje = a01[nummer2 - 1];
+            return plaatje;
+        }
+        public static Image meme(int nummer)
+        {
+            int nummer2 = nummer / 2;
+            if (nummer % 2 != 0)
+            {
+                nummer2 = (nummer + 1) / 2;
+            }
+
+            List<Image> m01 = new List<Image>();
+            m01.Add(Properties.Resources.Meme_1);
+            m01.Add(Properties.Resources.Meme_2);
+            m01.Add(Properties.Resources.Meme_3);
+            m01.Add(Properties.Resources.Meme_4);
+            m01.Add(Properties.Resources.Meme_5);
+            m01.Add(Properties.Resources.Meme_6);
+            m01.Add(Properties.Resources.Meme_7);
+            m01.Add(Properties.Resources.Meme_8);
+            m01.Add(Properties.Resources.Meme_9);
+            m01.Add(Properties.Resources.Meme_10);
+            m01.Add(Properties.Resources.Meme_11);
+            m01.Add(Properties.Resources.Meme_12);
+            m01.Add(Properties.Resources.Meme_13);
+            m01.Add(Properties.Resources.Meme_14);
+            m01.Add(Properties.Resources.Meme_15);
+            m01.Add(Properties.Resources.Meme_16);
+            m01.Add(Properties.Resources.Meme_17);
+            m01.Add(Properties.Resources.Meme_18);
+            m01.Add(Properties.Resources.Meme_19);
+            m01.Add(Properties.Resources.Meme_20);
+            m01.Add(Properties.Resources.Meme_21);
+            m01.Add(Properties.Resources.Meme_22);
+            m01.Add(Properties.Resources.Meme_23);
+            m01.Add(Properties.Resources.Meme_24);
+            m01.Add(Properties.Resources.Meme_25);
+            m01.Add(Properties.Resources.Meme_26);
+            m01.Add(Properties.Resources.Meme_27);
+            m01.Add(Properties.Resources.Meme_28);
+            m01.Add(Properties.Resources.Meme_29);
+            m01.Add(Properties.Resources.Meme_30);
+            m01.Add(Properties.Resources.Meme_31);
+            m01.Add(Properties.Resources.Meme_32);
+            Image plaatje = m01[nummer2 - 1];
+            return plaatje;
         }
 
         private void Form1_Load(object sender, EventArgs e)
