@@ -16,6 +16,5 @@ namespace Meme_Ory_Game
         {
             InitializeComponent();
         }
-
     }
 }
