@@ -163,6 +163,16 @@ namespace Meme_Ory_Game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap if_Gameboy_381627 {
+            get {
+                object obj = ResourceManager.GetObject("if_Gameboy_381627", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap image_0 {
             get {
                 object obj = ResourceManager.GetObject("image_0", resourceCulture);
@@ -876,6 +886,16 @@ namespace Meme_Ory_Game.Properties {
         internal static System.Drawing.Bitmap nicolas_11 {
             get {
                 object obj = ResourceManager.GetObject("nicolas_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nicolas_111 {
+            get {
+                object obj = ResourceManager.GetObject("nicolas_111", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

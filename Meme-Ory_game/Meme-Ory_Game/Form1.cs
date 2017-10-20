@@ -694,7 +694,7 @@ namespace Meme_Ory_Game
             Thema.ForeColor = Roze;
         }      
 
-        // Field [Panel]
+        // Field layout [Panel]
         public void CreateLayoutPanel()
         {
             MemoryPanel.Controls.Clear();
@@ -907,11 +907,12 @@ namespace Meme_Ory_Game
 
             secondClicked = clickedButton; // filling 2nd comparer   
 
-            if ((Convert.ToInt32(firstClicked.Text) % 2 != 0))
+            if ((Convert.ToInt32(firstClicked.Name) % 2 != 0))
             {
-                if (Convert.ToInt32(firstClicked.Text) == (Convert.ToInt32(secondClicked.Text) - 1))
+                if (Convert.ToInt32(firstClicked.Name) == (Convert.ToInt32(secondClicked.Name) - 1))
                 {
                     if (player1beurt == true) { player1score++; Player1Score.Text = Convert.ToString(player1score); }
+
                     else { player2score++; Player2Score.Text = Convert.ToString(player2score); }
 
                     if (player1score + player2score == maxscore - 1) { Victory(); }
@@ -925,7 +926,8 @@ namespace Meme_Ory_Game
                 {
                     if (player1beurt == true) { player1beurt = false; PlayerTurn.Text = PlayerName_2.Text + "'s turn"; }
                     else { player1beurt = true; PlayerTurn.Text = PlayerName_1.Text + "'s turn"; }
-                    await Task.Delay(500);
+                    await Task.Delay(50);
+                    System.Threading.Thread.Sleep(500);
                     firstClicked.BackgroundImage = achtergrond(thema);
                     secondClicked.BackgroundImage = achtergrond(thema);
                     firstClicked = null;
@@ -935,7 +937,7 @@ namespace Meme_Ory_Game
             }
             else
             {
-                if (Convert.ToInt32(firstClicked.Text) == (Convert.ToInt32(secondClicked.Text) + 1))
+                if (Convert.ToInt32(secondClicked.Name) == (Convert.ToInt32(firstClicked.Name) - 1))
                 {
                     if (player1beurt == true)
                     {
@@ -947,7 +949,7 @@ namespace Meme_Ory_Game
                     }
                     if (player1score + player2score == maxscore - 1) { Victory(); }
                     firstClicked.Enabled = false;
-                    firstClicked.Enabled = false;
+                    secondClicked.Enabled = false;
                     firstClicked = null;
                     secondClicked = null;
                     return;
@@ -956,7 +958,8 @@ namespace Meme_Ory_Game
                 {
                     if (player1beurt == true) { player1beurt = false; PlayerTurn.Text = PlayerName_2.Text + "'s turn"; }
                     else { player1beurt = true; PlayerTurn.Text = PlayerName_1.Text + "'s turn"; }
-                    await Task.Delay(500);
+                    await Task.Delay(50);
+                    System.Threading.Thread.Sleep(500);
                     firstClicked.BackgroundImage = achtergrond(thema);
                     secondClicked.BackgroundImage = achtergrond(thema);
                     firstClicked = null;
