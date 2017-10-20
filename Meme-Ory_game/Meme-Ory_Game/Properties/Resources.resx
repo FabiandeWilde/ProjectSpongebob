@@ -640,4 +640,22 @@
   <data name="spongebob_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\spongebob_9.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Epic_Sax_Guy__Original___HD_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Epic-Sax-Guy-_Original_-_HD_.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Koji_Kondo_Super_Mario_64_Dire__Dire_Docks__underwater_cave__www_my_free_mp3_net_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Koji-Kondo-Super-Mario-64-Dire_-Dire-Docks-_underwater-cave_-www.my-free-mp3.net-.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Not_the_Bees_Nic_Cage_in_The_Wicker_Man" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Not-the-Bees-Nic-Cage-in-The-Wicker-Man.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SpongeBob" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpongeBob.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SpongeBob_Trap_Remix_Krusty_Krab" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpongeBob-Trap-Remix-Krusty-Krab.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="XX_Intro_www_my_free_mp3_net_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\XX-Intro-www.my-free-mp3.net-.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

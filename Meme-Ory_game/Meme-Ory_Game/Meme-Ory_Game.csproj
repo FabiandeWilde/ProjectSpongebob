@@ -119,9 +119,13 @@
     <Content Include="Resources\d11.bmp" />
     <Content Include="Resources\d12.bmp" />
     <Content Include="Resources\d13.bmp" />
+    <None Include="Resources\XX-Intro-www.my-free-mp3.net-.wav" />
+    <None Include="Resources\SpongeBob-Trap-Remix-Krusty-Krab.wav" />
+    <None Include="Resources\SpongeBob.wav" />
     <None Include="Resources\spongebob_5.jpg" />
     <None Include="Resources\spongebob_9.jpg" />
     <None Include="Resources\gametitle.gif" />
+    <None Include="Resources\Epic-Sax-Guy-_Original_-_HD_.wav" />
     <Content Include="Resources\h01.bmp" />
     <Content Include="Resources\h13.bmp" />
     <None Include="Resources\if_Gameboy_381627.png" />
@@ -227,6 +231,8 @@
     <None Include="Resources\Meme_9.jpg" />
     <None Include="Resources\Meme_29.jpg" />
     <None Include="Resources\nicolas_1.bmp" />
+    <None Include="Resources\Not-the-Bees-Nic-Cage-in-The-Wicker-Man.wav" />
+    <None Include="Resources\Koji-Kondo-Super-Mario-64-Dire_-Dire-Docks-_underwater-cave_-www.my-free-mp3.net-.wav" />
     <Content Include="Resources\s01.bmp" />
     <Content Include="Resources\s02.bmp" />
     <Content Include="Resources\s03.bmp" />

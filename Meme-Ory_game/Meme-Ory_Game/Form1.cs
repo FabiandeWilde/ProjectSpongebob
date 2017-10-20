@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Media;
+
 
 namespace Meme_Ory_Game
 {
@@ -18,14 +20,21 @@ namespace Meme_Ory_Game
         int maxscore = 0;
         int player1score = 0;
         int player2score = 0;
+        int timerCount = 0;
         string thema;
         string path = System.AppDomain.CurrentDomain.BaseDirectory;
         string savefile1 = "Save1.txt";
         string savefile2 = "Save2.txt";
         string savefile3 = "Save3.txt";
+        string savefile4 = "Save4.txt";
+        string savefile5 = "Save5.txt";
+        string savefile6 = "Save6.txt";
         string HighScore = "HighScore.txt";
         string HighScore1 = "HighScore1.txt";
         string HighScore2 = "HighScore2.txt";
+        string singeplayerhighscore1 = "Singeplayer1.txt";
+        string singeplayerhighscore2 = "Singeplayer2.txt";
+        string singeplayerhighscore3 = "Singeplayer3.txt";
         bool player1beurt = true;
         ComboBox Speelveld = new ComboBox();
         ComboBox Gamemode = new ComboBox();
@@ -56,6 +65,8 @@ namespace Meme_Ory_Game
         Label player2Title = new Label();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
         PictureBox GameTitle = new PictureBox();
+        Label timerLabel = new Label();
+        System.Windows.Forms.Timer timer;
         #endregion
 
         public Form1()
@@ -214,7 +225,44 @@ namespace Meme_Ory_Game
             veldtypeTitle.Visible = false;
             player1Title.Visible = false;
             player2Title.Visible = false;
-            
+            if (Gamemode.Text == "Singleplayer")
+            {
+                CreateTimerLabel();
+                CreateTimer();
+                Player1Score.Visible = false;
+            }
+
+
+        }
+
+        // Timer [Label]
+        public void CreateTimerLabel()
+        {
+            this.Controls.Add(timerLabel);
+            var Roze = System.Drawing.Color.FromArgb(199, 21, 133);
+            var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
+            timerLabel.Location = new Point(10, 50);
+            timerLabel.Size = new Size(120, 50);
+            timerLabel.Text = "Time: " + timerCount.ToString();
+            timerLabel.Font = new Font("Lucida Sans", 15);
+            timerLabel.ForeColor = Wit;
+            timerLabel.BackColor = Roze;
+        }
+
+        // Timer [Timer]
+        public void CreateTimer()
+        {
+            timer = new System.Windows.Forms.Timer();
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Interval = 1000; // Om de seconde timerCount++
+            timer.Start();
+        }
+
+        // Timer [Function]
+        public void Timer_Tick(object sender, EventArgs e)
+        {
+            timerCount++;
+            timerLabel.Text = "Time: " + timerCount.ToString();
         }
 
         // Highscore [Button]
@@ -242,7 +290,7 @@ namespace Meme_Ory_Game
         public void CreateListview()
         {
             string tekst = File.ReadAllText(path + HighScore);
-            string[] scores = tekst.Split(' ');
+            string[] scores = tekst.Split('-');
             ListView listView1 = new ListView();
             listView1.Bounds = new Rectangle(new Point(10, 10), new Size(200, 200));
             listView1.View = View.Details;
@@ -252,6 +300,71 @@ namespace Meme_Ory_Game
             listView1.Sorting = SortOrder.Descending;
             listView1.Columns.Add("Score", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            // Listview [2]
+            string tekst2 = File.ReadAllText(path + HighScore1);
+            string[] scores2 = tekst2.Split('-');
+            ListView listView12 = new ListView();
+            listView12.Bounds = new Rectangle(new Point(210, 10), new Size(200, 200));
+            listView12.View = View.Details;
+            listView12.AllowColumnReorder = true;
+            listView12.FullRowSelect = true;
+            listView12.GridLines = true;
+            listView12.Sorting = SortOrder.Descending;
+            listView12.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            listView12.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            // Listview [3]
+            string tekst3 = File.ReadAllText(path + HighScore2);
+            string[] scores3 = tekst3.Split('-');
+            ListView listView13 = new ListView();
+            listView13.Bounds = new Rectangle(new Point(410, 10), new Size(200, 200));
+            listView13.View = View.Details;
+            listView13.AllowColumnReorder = true;
+            listView13.FullRowSelect = true;
+            listView13.GridLines = true;
+            listView13.Sorting = SortOrder.Descending;
+            listView13.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            listView13.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            //listview 1 player 4
+            string tekst4 = File.ReadAllText(path + singeplayerhighscore1);
+            string[] scores4 = tekst4.Split('-');
+            ListView listView4 = new ListView();
+            listView4.Bounds = new Rectangle(new Point(610, 10), new Size(200, 200));
+            listView4.View = View.Details;
+            listView4.AllowColumnReorder = true;
+            listView4.FullRowSelect = true;
+            listView4.GridLines = true;
+            listView4.Sorting = SortOrder.Ascending;
+            listView4.Columns.Add("Time", -2, HorizontalAlignment.Left);
+            listView4.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            //listview 1 player 6
+            string tekst5 = File.ReadAllText(path + singeplayerhighscore2);
+            string[] scores5 = tekst5.Split('-');
+            ListView listView5 = new ListView();
+            listView5.Bounds = new Rectangle(new Point(810, 10), new Size(200, 200));
+            listView5.View = View.Details;
+            listView5.AllowColumnReorder = true;
+            listView5.FullRowSelect = true;
+            listView5.GridLines = true;
+            listView5.Sorting = SortOrder.Ascending;
+            listView5.Columns.Add("Time", -2, HorizontalAlignment.Left);
+            listView5.Columns.Add("Name", -2, HorizontalAlignment.Left);
+
+            //listview 1 player 8
+            string tekst6 = File.ReadAllText(path + singeplayerhighscore3);
+            string[] scores6 = tekst6.Split('-');
+            ListView listView6 = new ListView();
+            listView6.Bounds = new Rectangle(new Point(1010, 10), new Size(200, 200));
+            listView6.View = View.Details;
+            listView6.AllowColumnReorder = true;
+            listView6.FullRowSelect = true;
+            listView6.GridLines = true;
+            listView6.Sorting = SortOrder.Ascending;
+            listView6.Columns.Add("Time", -2, HorizontalAlignment.Left);
+            listView6.Columns.Add("Name", -2, HorizontalAlignment.Left);
 
             int x = 0;
             for (int i = 0; i < (scores.Length - 2); i += 2)
@@ -264,28 +377,6 @@ namespace Meme_Ory_Game
                 listView1.Items[x].SubItems[1].Text = scores[i]; // 2nd value from array                
                 if (i % 2 == 0) x++;
             }
-            // Create two ImageList objects
-            ImageList imageListSmall = new ImageList();
-            ImageList imageListLarge = new ImageList();
-            //Assign the ImageList objects to the ListView
-            listView1.LargeImageList = imageListLarge;
-            listView1.SmallImageList = imageListSmall;
-            // Add the ListView to the control collection
-            this.Controls.Add(listView1);
-
-            // Listview [2]
-
-            string tekst2 = File.ReadAllText(path + HighScore1);
-            string[] scores2 = tekst2.Split(' ');
-            ListView listView12 = new ListView();
-            listView12.Bounds = new Rectangle(new Point(410, 10), new Size(200, 200));
-            listView12.View = View.Details;
-            listView12.AllowColumnReorder = true;
-            listView12.FullRowSelect = true;
-            listView12.GridLines = true;
-            listView12.Sorting = SortOrder.Descending;
-            listView12.Columns.Add("Score", -2, HorizontalAlignment.Left);
-            listView12.Columns.Add("Name", -2, HorizontalAlignment.Left);
 
             int xx = 0;
             for (int i = 0; i < (scores2.Length - 2); i += 2)
@@ -298,29 +389,6 @@ namespace Meme_Ory_Game
                 listView12.Items[xx].SubItems[1].Text = scores2[i]; // 2nd value from array                
                 if (i % 2 == 0) xx++;
             }
-            // Create two ImageList objects
-            ImageList imageListSmall2 = new ImageList();
-            ImageList imageListLarge2 = new ImageList();
-
-            //Assign the ImageList objects to the ListView
-            listView12.LargeImageList = imageListLarge;
-            listView12.SmallImageList = imageListSmall;
-
-            // Add the ListView to the control collection
-            this.Controls.Add(listView12);
-
-            // Listview [3]
-            string tekst3 = File.ReadAllText(path + HighScore2);
-            string[] scores3 = tekst3.Split(' ');
-            ListView listView13 = new ListView();
-            listView13.Bounds = new Rectangle(new Point(610, 10), new Size(200, 200));
-            listView13.View = View.Details;
-            listView13.AllowColumnReorder = true;
-            listView13.FullRowSelect = true;
-            listView13.GridLines = true;
-            listView13.Sorting = SortOrder.Descending;
-            listView13.Columns.Add("Score", -2, HorizontalAlignment.Left);
-            listView13.Columns.Add("Name", -2, HorizontalAlignment.Left);
 
             int xxx = 0;
             for (int i = 0; i < (scores3.Length - 2); i += 2)
@@ -333,17 +401,54 @@ namespace Meme_Ory_Game
                 listView13.Items[xxx].SubItems[1].Text = scores3[i]; // 2nd value from array                
                 if (i % 2 == 0) xxx++;
             }
-            // Create two ImageList objects
-            ImageList imageListSmall3 = new ImageList();
-            ImageList imageListLarge3 = new ImageList();
 
-            // Assign the ImageList objects to the ListView
-            listView13.LargeImageList = imageListLarge;
-            listView13.SmallImageList = imageListSmall;
+            int player14 = 0;
+            for (int i = 0; i < (scores4.Length - 2); i += 2)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = ""; // 1st column
+                item.SubItems.Add(""); // 2nd column             
+                listView4.Items.Add(item);
+                listView4.Items[player14].SubItems[0].Text = scores4[(i + 1)]; // 1st value from array
+                listView4.Items[player14].SubItems[1].Text = scores4[i]; // 2nd value from array                
+                if (i % 2 == 0) player14++;
+            }
+
+            int player16 = 0;
+            for (int i = 0; i < (scores5.Length - 2); i += 2)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = ""; // 1st column
+                item.SubItems.Add(""); // 2nd column             
+                listView5.Items.Add(item);
+                listView5.Items[player16].SubItems[0].Text = scores5[(i + 1)]; // 1st value from array
+                listView5.Items[player16].SubItems[1].Text = scores5[i]; // 2nd value from array                
+                if (i % 2 == 0) player16++;
+            }
+
+            int player18 = 0;
+            for (int i = 0; i < (scores6.Length - 2); i += 2)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = ""; // 1st column
+                item.SubItems.Add(""); // 2nd column             
+                listView6.Items.Add(item);
+                listView6.Items[player18].SubItems[0].Text = scores6[(i + 1)]; // 1st value from array
+                listView6.Items[player18].SubItems[1].Text = scores6[i]; // 2nd value from array                
+                if (i % 2 == 0) player18++;
+            }
 
             // Add the ListView to the control collection
+            this.Controls.Add(listView1);
+            this.Controls.Add(listView12);
             this.Controls.Add(listView13);
-        }        
+            this.Controls.Add(listView4);
+            this.Controls.Add(listView5);
+            this.Controls.Add(listView6);
+
+        }
+
+
 
         // Continue [Button] && Save [Button]
         public void CreateContinueSaveButton()
@@ -372,29 +477,54 @@ namespace Meme_Ory_Game
         // Continue [Function]
         public void ContinueButton_Click(object sender, EventArgs e)
         {
+
             string tekst = " ";
-            if (Amount == 4) { tekst = File.ReadAllText(savefile1); }
-            if (Amount == 6) { tekst = File.ReadAllText(savefile2); }
-            if (Amount == 8) { tekst = File.ReadAllText(savefile3); }
+            int teller = 0;
+            int trueteller = 0;
+            string[] scores = new string[] { };
+            if (Gamemode.Text == "Multiplayer")
+            {
+                if (Amount == 4) { tekst = File.ReadAllText(savefile1); }
+                if (Amount == 6) { tekst = File.ReadAllText(savefile2); }
+                if (Amount == 8) { tekst = File.ReadAllText(savefile3); }
 
 
-            string[] scores = tekst.Split(' ');
-            PlayerNameLabel_1.Text = scores[0];
-            player1score = Convert.ToInt32(scores[1]);
-            Player1Score.Text = scores[1];
-            PlayerNameLabel_2.Text = scores[2];
-            player2score = Convert.ToInt32(scores[3]);
-            Player2Score.Text = scores[3];
-            player1beurt = Convert.ToBoolean(scores[4]);
-            PlayerTurn.Text = scores[5];
-            int teller = 7;
-            int trueteller = 8;
+                scores = tekst.Split('-');
+                PlayerNameLabel_1.Text = scores[0];
+                player1score = Convert.ToInt32(scores[1]);
+                Player1Score.Text = scores[1];
+                PlayerNameLabel_2.Text = scores[2];
+                player2score = Convert.ToInt32(scores[3]);
+                Player2Score.Text = scores[3];
+                player1beurt = Convert.ToBoolean(scores[4]);
+                PlayerTurn.Text = scores[5];
+                teller = 7;
+                trueteller = 8;
+
+            }
+            else
+            {
+                if (Amount == 4) { tekst = File.ReadAllText(savefile4); }
+                if (Amount == 6) { tekst = File.ReadAllText(savefile5); }
+                if (Amount == 8) { tekst = File.ReadAllText(savefile6); }
+                scores = tekst.Split('-');
+
+                PlayerNameLabel_1.Text = scores[0];
+                timerCount = Convert.ToInt32(scores[1]);
+                player1score = 0;
+                player2score = 0;
+                player1score = Convert.ToInt32(scores[2]);
+                player2score = Convert.ToInt32(scores[3]);
+                teller = 4;
+                trueteller = 5;
+            }
+
 
             foreach (Control x in MemoryPanel.Controls)
             {
                 if (x is Button)
                 {
-                    x.Text = scores[teller];//essential
+                    x.Name = scores[teller];//essential
                     teller += 2;//essential
                     x.Enabled = Convert.ToBoolean(scores[trueteller]);// change to enable 
                     if (x.Enabled == false)
@@ -403,22 +533,22 @@ namespace Meme_Ory_Game
                         if (Thema.Text == "spongebob")
                         {
                             nummer = Convert.ToInt32(x.Name);
-                            (x as Button).Image = spongebob(nummer);
+                            (x as Button).BackgroundImage = spongebob(nummer);
                         }
                         if (Thema.Text == "meme")
                         {
                             nummer = Convert.ToInt32(x.Name);
-                            (x as Button).Image = meme(nummer);
+                            (x as Button).BackgroundImage = meme(nummer);
                         }
                         if (Thema.Text == "cage")
                         {
                             nummer = Convert.ToInt32(x.Name);
-                            (x as Button).Image = cage(nummer);
+                            (x as Button).BackgroundImage = cage(nummer);
                         }
                         if (Thema.Text == "speelkaarten")
                         {
                             nummer = Convert.ToInt32(x.Name);
-                            (x as Button).Image = speelkaarten(nummer);
+                            (x as Button).BackgroundImage = speelkaarten(nummer);
                         }
 
                     }
@@ -434,80 +564,134 @@ namespace Meme_Ory_Game
             // Player names ~~ player scores ~~ turn scores ~~ player's turn name ~~ field tiles ~~ timer(singelplayer)
             // PictureBox vergelijker = new PictureBox();
             // Vergelijker.Image = Properties.Resources._0;
-            if (Amount == 4)
+            if (Gamemode.Text == "Multiplayer")
             {
-                File.WriteAllText(savefile1, String.Empty);
-
-                File.AppendAllText(path + savefile1,
-                (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
-
-                foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                if (Amount == 4)
                 {
-                    if (x is Button)
+                    File.WriteAllText(savefile1, String.Empty);
+                    File.AppendAllText(path + savefile1, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
+
+                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
                     {
-                        File.AppendAllText(savefile1,
-                        Convert.ToString(x.Text) + " ");
-                        if (((x as Button).Enabled) == false)
+                        if (x is Button)
                         {
-                            File.AppendAllText(savefile1,
-                             "false" + " ");
+                            File.AppendAllText(savefile1, Convert.ToString(x.Name) + "-");
+                            if (((x as Button).Enabled) == false)
+                            {
+                                File.AppendAllText(savefile1, "false" + "-");
+                            }
+                            else
+                            {
+                                File.AppendAllText(savefile1, "true" + "-");
+                            }
                         }
-                        else
+                    }
+                }
+                if (Amount == 6)
+                {
+                    File.WriteAllText(path + savefile2, String.Empty);
+                    File.AppendAllText(path + savefile2, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
+
+                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                    {
+                        if (x is Button)
                         {
-                            File.AppendAllText(savefile1,
-                            "true" + " ");
+                            File.AppendAllText(path + savefile2, Convert.ToString(x.Name) + "-");
+                            if (((x as Button).Enabled) == false)
+                            {
+                                File.AppendAllText(path + savefile2, "false" + "-");
+                            }
+                            else
+                            {
+                                File.AppendAllText(path + savefile2, "true" + "-");
+                            }
+                        }
+                    }
+                }
+                if (Amount == 8)
+                {
+                    File.WriteAllText(path + savefile3, String.Empty);
+                    File.AppendAllText(path + savefile3, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
+
+                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                    {
+                        if (x is Button)
+                        {
+                            File.AppendAllText(path + savefile3, Convert.ToString(x.Name) + "-");
+                            if (((x as Button).Enabled) == false)
+                            {
+                                File.AppendAllText(path + savefile3, "false" + "-");
+                            }
+                            else
+                            {
+                                File.AppendAllText(path + savefile3, "true" + "-");
+                            }
                         }
                     }
                 }
             }
-            if (Amount == 6)
+            else  // singeplayer
             {
-                File.WriteAllText(path + savefile2, String.Empty);
-
-                File.AppendAllText(path + savefile2,
-                (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
-
-                foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                if (Amount == 4)
                 {
-                    if (x is Button)
+                    File.WriteAllText(savefile4, String.Empty);
+                    File.AppendAllText(path + savefile4, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
+
+                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
                     {
-                        File.AppendAllText(path + savefile2,
-                        Convert.ToString(x.Text) + " ");
-                        if (((x as Button).Enabled) == false)
+                        if (x is Button)
                         {
-                            File.AppendAllText(path + savefile2,
-                             "false" + " ");
-                        }
-                        else
-                        {
-                            File.AppendAllText(path + savefile2,
-                            "true" + " ");
+                            File.AppendAllText(savefile4, Convert.ToString(x.Name) + "-");
+                            if (((x as Button).Enabled) == false)
+                            {
+                                File.AppendAllText(savefile4, "false" + "-");
+                            }
+                            else
+                            {
+                                File.AppendAllText(savefile4, "true" + "-");
+                            }
                         }
                     }
                 }
-            }
-            if (Amount == 8)
-            {
-                File.WriteAllText(path + savefile3, String.Empty);
-
-                File.AppendAllText(path + savefile3,
-                (PlayerNameLabel_1.Text + " " + player1score + " " + PlayerNameLabel_2.Text + " " + player2score + " " + player1beurt + " " + PlayerTurn.Text + " "));
-
-                foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                if (Amount == 6)
                 {
-                    if (x is Button)
+                    File.WriteAllText(path + savefile5, String.Empty);
+                    File.AppendAllText(path + savefile5, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
+
+                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
                     {
-                        File.AppendAllText(path + savefile3,
-                        Convert.ToString(x.Text) + " ");
-                        if (((x as Button).Enabled) == false)
+                        if (x is Button)
                         {
-                            File.AppendAllText(path + savefile3,
-                             "false" + " ");
+                            File.AppendAllText(path + savefile5, Convert.ToString(x.Name) + "-");
+                            if (((x as Button).Enabled) == false)
+                            {
+                                File.AppendAllText(path + savefile5, "false" + "-");
+                            }
+                            else
+                            {
+                                File.AppendAllText(path + savefile5, "true" + "-");
+                            }
                         }
-                        else
+                    }
+                }
+                if (Amount == 8)
+                {
+                    File.WriteAllText(path + savefile6, String.Empty);
+                    File.AppendAllText(path + savefile6, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
+
+                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                    {
+                        if (x is Button)
                         {
-                            File.AppendAllText(path + savefile3,
-                            "true" + " ");
+                            File.AppendAllText(path + savefile6, Convert.ToString(x.Name) + "-");
+                            if (((x as Button).Enabled) == false)
+                            {
+                                File.AppendAllText(path + savefile6, "false" + "-");
+                            }
+                            else
+                            {
+                                File.AppendAllText(path + savefile6, "true" + "-");
+                            }
                         }
                     }
                 }
@@ -595,8 +779,15 @@ namespace Meme_Ory_Game
         public void Resetbutton_Click(object sender, EventArgs e)
         {
             CreateLayoutPanel();
-            Player1Score.Text = Convert.ToString(player1score = 0);
-            Player2Score.Text = Convert.ToString(player2score = 0);
+            if (Gamemode.Text == "Singleplayer")
+            {
+                timerCount = 0 - 1;
+            }
+            else
+            {
+                Player1Score.Text = Convert.ToString(player1score = 0);
+                Player2Score.Text = Convert.ToString(player2score = 0);
+            }
         }
 
         // Fieldtype [Box]
@@ -697,16 +888,17 @@ namespace Meme_Ory_Game
         // Field layout [Panel]
         public void CreateLayoutPanel()
         {
+            
             MemoryPanel.Controls.Clear();
             MemoryPanel.RowStyles.Clear();
             MemoryPanel.ColumnStyles.Clear();
             int Amountx = Convert.ToInt32(Amount * Amount);
-            int[] numberCards = new int[Amountx];
-            int[] randomarray = random(numberCards);
+            int[] randomarray = random(Amountx);
             MemoryPanel.Location = new System.Drawing.Point(200, 10);
             MemoryPanel.Size = new System.Drawing.Size(600, 600);
             MemoryPanel.RowCount = Amount;
             MemoryPanel.ColumnCount = Amount;
+            
             for (int i = 0; i < (Amount); i++)
             {
                 MemoryPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
@@ -725,6 +917,7 @@ namespace Meme_Ory_Game
             }
             maxscore = Amount * Amount / 2;
             this.Controls.Add(MemoryPanel);
+            //Musicplayer(thema);
         }
 
         // Player [Textbox]
@@ -829,12 +1022,12 @@ namespace Meme_Ory_Game
         }
 
         // Random int[] [Function]
-        public static int[] random(int[] array)         
+        public static int[] random(int nummer)         
         {
-            // Method to refill the 0,0 array with random non-duplicate numbers between from 1 to 16
+            // Fill array with random numbers from 1 to 'nummer'
             var random = new Random();
 
-            int[] randomArray = Enumerable.Range(1, array.Length).OrderBy(x => random.Next()).ToArray();
+            int[] randomArray = Enumerable.Range(1, nummer).OrderBy(x => random.Next()).ToArray();
             return randomArray;
         }
 
@@ -1184,6 +1377,51 @@ namespace Meme_Ory_Game
             Image plaatje = m01[nummer2 - 1];
             return plaatje;
             #endregion 
+        }
+        
+        public static void Musicplayer(string thema)
+        {
+            if (thema == "spongebob")
+            {
+                SoundPlayer player = new SoundPlayer
+                {
+                    Stream = Properties.Resources.SpongeBob_Trap_Remix_Krusty_Krab
+                };
+                player.LoadAsync();
+                player.PlayLooping();
+
+            }
+            if (thema == "cage")
+            {
+                SoundPlayer player = new SoundPlayer
+                {
+                    Stream = Properties.Resources.Not_the_Bees_Nic_Cage_in_The_Wicker_Man
+                };
+                player.LoadAsync();
+                player.PlayLooping();
+
+            }
+            if (thema == "speelkaarten")
+            {
+                SoundPlayer player = new SoundPlayer
+                {
+                    Stream = Properties.Resources.XX_Intro_www_my_free_mp3_net_
+                };
+                player.LoadAsync();
+                player.PlayLooping();
+
+            }
+            if (thema == "meme")
+            {
+                SoundPlayer player = new SoundPlayer
+                {
+                    Stream = Properties.Resources.Koji_Kondo_Super_Mario_64_Dire__Dire_Docks__underwater_cave__www_my_free_mp3_net_
+                };
+                player.LoadAsync();
+                player.PlayLooping();
+
+            }
+
         }
 
         // ???
