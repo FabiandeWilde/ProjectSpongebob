@@ -131,15 +131,6 @@ namespace Meme_Ory_Game.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Epic_Sax_Guy__Original___HD_ {
-            get {
-                return ResourceManager.GetStream("Epic_Sax_Guy__Original___HD_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap gametitle {
@@ -165,16 +156,6 @@ namespace Meme_Ory_Game.Properties {
         internal static System.Drawing.Bitmap h13 {
             get {
                 object obj = ResourceManager.GetObject("h13", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap if_Gameboy_381627 {
-            get {
-                object obj = ResourceManager.GetObject("if_Gameboy_381627", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -526,16 +507,6 @@ namespace Meme_Ory_Game.Properties {
             get {
                 object obj = ResourceManager.GetObject("jr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Koji_Kondo_Super_Mario_64_Dire__Dire_Docks__underwater_cave__www_my_free_mp3_net_ {
-            get {
-                return ResourceManager.GetStream("Koji_Kondo_Super_Mario_64_Dire__Dire_Docks__underwater_cave__www_my_free_mp3_net_" +
-                        "", resourceCulture);
             }
         }
         
@@ -912,16 +883,6 @@ namespace Meme_Ory_Game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap nicolas_111 {
-            get {
-                object obj = ResourceManager.GetObject("nicolas_111", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap nicolas_12 {
             get {
                 object obj = ResourceManager.GetObject("nicolas_12", resourceCulture);
@@ -1210,15 +1171,6 @@ namespace Meme_Ory_Game.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Not_the_Bees_Nic_Cage_in_The_Wicker_Man {
-            get {
-                return ResourceManager.GetStream("Not_the_Bees_Nic_Cage_in_The_Wicker_Man", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap s01 {
@@ -1495,15 +1447,6 @@ namespace Meme_Ory_Game.Properties {
             get {
                 object obj = ResourceManager.GetObject("s133", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream SpongeBob {
-            get {
-                return ResourceManager.GetStream("SpongeBob", resourceCulture);
             }
         }
         
@@ -1834,24 +1777,6 @@ namespace Meme_Ory_Game.Properties {
             get {
                 object obj = ResourceManager.GetObject("spongebob_9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream SpongeBob_Trap_Remix_Krusty_Krab {
-            get {
-                return ResourceManager.GetStream("SpongeBob_Trap_Remix_Krusty_Krab", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream XX_Intro_www_my_free_mp3_net_ {
-            get {
-                return ResourceManager.GetStream("XX_Intro_www_my_free_mp3_net_", resourceCulture);
             }
         }
     }
