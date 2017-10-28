@@ -929,7 +929,7 @@ namespace Meme_Ory_Game
             Thema.ForeColor = Roze;
         }      
 
-        // Field layout [Panel]    !!! [Musicplayer - Bug]
+        // Field layout [Panel]
         public void CreateLayoutPanel()
         {
             
@@ -943,7 +943,7 @@ namespace Meme_Ory_Game
             MemoryPanel.RowCount = Amount;
             MemoryPanel.ColumnCount = Amount;
             MemoryPanel.BackColor = Color.Transparent;
-            
+
             for (int i = 0; i < (Amount); i++)
             {
                 MemoryPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
@@ -953,6 +953,7 @@ namespace Meme_Ory_Game
             {
                 var button = new Button
                 {
+                    //Text enabled for testing, removed for final product
                     Text = Convert.ToString(randomarray[i]),
                     Name = Convert.ToString(randomarray[i]),
                     BackgroundImage = Background(thema),
@@ -1168,6 +1169,7 @@ namespace Meme_Ory_Game
             {
                 clickedButton.BackgroundImage = RickMorty(nummer);
             }
+            
             clickedButton.BackgroundImageLayout = ImageLayout.Stretch;
 
 
@@ -1269,7 +1271,7 @@ namespace Meme_Ory_Game
                 Image keuze = Properties.Resources.rmcardback;
                 return keuze;
             }
-            else //if (themakeuze == "Playing Cards")
+            else //if (thema == "Playing Cards")
             {
                 Image keuze = Properties.Resources.pccardback;
                 return keuze;
@@ -1521,6 +1523,7 @@ namespace Meme_Ory_Game
             return plaatje;
             #endregion 
         }
+        
 
         // Background Music [Soundplayer]
         public static SoundPlayer Musicplayer(string thema)

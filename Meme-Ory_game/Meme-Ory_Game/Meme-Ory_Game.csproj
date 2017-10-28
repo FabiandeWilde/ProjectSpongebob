@@ -98,6 +98,7 @@
     <Content Include="Resources\b1fv.bmp" />
     <Content Include="Resources\c01.bmp" />
     <Content Include="Resources\c13.bmp" />
+    <None Include="Resources\cage.wav" />
     <Content Include="Resources\d01.bmp" />
     <Content Include="Resources\d011.bmp" />
     <Content Include="Resources\d02.bmp" />
