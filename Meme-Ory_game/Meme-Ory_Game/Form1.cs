@@ -38,9 +38,11 @@ namespace Meme_Ory_Game
         string singleplayerhighscore2 = "Singleplayer2.txt";
         string singleplayerhighscore3 = "Singleplayer3.txt";
         bool player1beurt = true;
+        bool muted = true;
         ComboBox Speelveld = new ComboBox();
         ComboBox Gamemode = new ComboBox();
         ComboBox Thema = new ComboBox();
+        ComboBox musicselect = new ComboBox();
         TextBox PlayerName_1 = new TextBox();
         TextBox PlayerName_2 = new TextBox();
         Button Start = new Button();
@@ -55,7 +57,7 @@ namespace Meme_Ory_Game
         Button Continue = new Button();
         Button Save = new Button();
         Button HighscoreSingleplayer = new Button();
-        Button HighscoreMultiplayer = new Button();
+        Button HighscoreMultiplayer = new Button();       
         Label Rules = new Label();
         Label Player1Score = new Label();
         Label Player2Score = new Label();
@@ -72,6 +74,7 @@ namespace Meme_Ory_Game
         ListViewItem item = new ListViewItem();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
         PictureBox GameTitle = new PictureBox();
+        Button mute = new Button();
         System.Windows.Forms.Timer timer;
         SoundPlayer mplayer;
         Label tester = new Label();
@@ -86,9 +89,10 @@ namespace Meme_Ory_Game
             CreateStartButton();
             CreateRulesButton();
             CreateHighScoreButton();
-          //  CreateGameTitle();
+            //CreateGameTitle();
             goback.Visible = false;
-            loadingimages();
+            //loadingimages(); // test field
+             musicselection();
 
             //Image Gamebackground = Properties.Resources.Gamebackground;
             //this.BackgroundImage = Gamebackground;
@@ -237,6 +241,7 @@ namespace Meme_Ory_Game
             reset.Visible = true;
             mplayer = Musicplayer(thema);
             mplayer.PlayLooping();
+            MuteMusic();
             if (Gamemode.Text == "Singleplayer")
             {
                 //CreateTimerLabel();
@@ -409,7 +414,7 @@ namespace Meme_Ory_Game
             {
                 if (variable is ListView)
                 {
-                    if ((variable as ListView).Name == "1")
+                    if ((variable as ListView).Name == "0")
                     {
                         int x = 0;
                         for (int i = 0; i < (scores.Length - 2); i += 2)
@@ -424,7 +429,7 @@ namespace Meme_Ory_Game
                         }
 
                     }
-                  else  if ((variable as ListView).Name == "2")
+                  else  if ((variable as ListView).Name == "1")
                     {
                         int x = 0;
                         for (int i = 0; i < (scores2.Length - 2); i += 2)
@@ -438,7 +443,7 @@ namespace Meme_Ory_Game
                             if (i % 2 == 0) x++;
                         }
                     }
-                  else  if ((variable as ListView).Name == "3")
+                  else  if ((variable as ListView).Name == "2")
                     {
                         int x = 0;
                         for (int i = 0; i < (scores3.Length - 2); i += 2)
@@ -452,7 +457,7 @@ namespace Meme_Ory_Game
                             if (i % 2 == 0) x++;
                         }
                     }
-                else    if ((variable as ListView).Name == "4")
+                else    if ((variable as ListView).Name == "3")
                     {
                         int x = 0;
                         for (int i = 0; i < (scores4.Length - 2); i += 2)
@@ -466,7 +471,7 @@ namespace Meme_Ory_Game
                             if (i % 2 == 0) x++;
                         }
                     }
-                else    if ((variable as ListView).Name == "5")
+                else    if ((variable as ListView).Name == "4")
                     {
                         int x = 0;
                         for (int i = 0; i < (scores5.Length - 2); i += 2)
@@ -481,7 +486,7 @@ namespace Meme_Ory_Game
                         }
 
                     }
-               else     if ((variable as ListView).Name == "6")
+               else     if ((variable as ListView).Name == "5")
                     {
                         int x = 0;
                         for (int i = 0; i < (scores6.Length - 2); i += 2)
@@ -621,8 +626,6 @@ namespace Meme_Ory_Game
         {
             // Variables to be saved:
             // Player names ~~ player scores ~~ turn scores ~~ player's turn name ~~ field tiles ~~ timer(singelplayer)
-            // PictureBox vergelijker = new PictureBox();
-            // Vergelijker.Image = Properties.Resources._0;
             if (firstClicked!= null)
             {
                 firstClicked.BackgroundImage = Background(thema);
@@ -783,12 +786,11 @@ namespace Meme_Ory_Game
         // Go Back [Function]
         public void GoBackbutton_Click(object sender, EventArgs e) // improved
         {
-            ClearAll();
-
-            Start.Visible = true;
-            rules.Visible = true;
-            Highscore.Visible = true;
-
+            //mplayer.Stop();
+            //mplayer.Stream = null;
+            FormClosed += (o, a) => new Form1().ShowDialog();
+            Hide();
+            Close();
         }
 
         // Rules [Button]
@@ -831,7 +833,6 @@ namespace Meme_Ory_Game
             reset.BackColor = Roze;
             reset.ForeColor = Wit;
         }
-
 
         public void CreateRulesLabel()
         {
@@ -957,17 +958,15 @@ namespace Meme_Ory_Game
             Thema.Items.Clear();
             string[] dirs = Directory.GetDirectories(path);
             int PathLength = path.Length;
-            foreach (string directory in dirs)
+            string MusicRemove = path +"CAGETUNES";// to remove music directory
+            dirs = dirs.Where(val => val != MusicRemove).ToArray();// see above
+            foreach (string directorynames in dirs)
             {
 
-                directory.Replace(path, "");
-                Thema.Items.Add(directory.Remove(0,PathLength));
+                directorynames.Replace(path, "");
+                Thema.Items.Add(directorynames.Remove(0,PathLength));
 
             };
-            //foreach (string dir in dirs)
-            //{
-            //    Thema.Items.Add(dir);
-            //}
             Thema.SelectedIndex = 0;
             Thema.BackColor = Wit;
             Thema.ForeColor = Roze;
@@ -1217,7 +1216,6 @@ namespace Meme_Ory_Game
             clickedButton.BackgroundImage = CustomCards(nummer, thema);
             clickedButton.BackgroundImageLayout = ImageLayout.Stretch;
 
-
             if (firstClicked == null)// filling 1st comparer
             {
                 firstClicked = clickedButton;
@@ -1293,9 +1291,10 @@ namespace Meme_Ory_Game
         }
 
         // Cardback [Image] 
-        public static Image Background(string thema) // im so smart hehehehehehehehhe
+        public static Image Background(string thema) 
         {
-            int image33 = 66;         
+            string[] files = Directory.GetFiles(thema, "*", SearchOption.TopDirectoryOnly);
+            int image33 = files.Length ;         
             Image keuze = CustomCards(image33, thema);
             return keuze;
         }
@@ -1304,7 +1303,7 @@ namespace Meme_Ory_Game
         {
             
             string path = System.AppDomain.CurrentDomain.BaseDirectory;
-            string themas = thema;
+         //   string themas = thema; //i guess its useless
             string[] files = Directory.GetFiles(thema, "*", SearchOption.TopDirectoryOnly);
             
             int nummer2 = nummer / 2;
@@ -1312,7 +1311,7 @@ namespace Meme_Ory_Game
             {
                 nummer2 = (nummer + 1) / 2;
             }           
-            List<Image> a01 = new List<Image> { };
+            List<Image> playingcards = new List<Image> { };
             foreach (var filename in files)
             {
                 Bitmap bmp = null;
@@ -1320,11 +1319,11 @@ namespace Meme_Ory_Game
                 {
                     bmp = new Bitmap(filename);
                 }
-                catch (Exception e)      { MessageBox.Show(e.Message);    continue;}
+                catch (Exception e)  { MessageBox.Show(e.Message);    continue;}
 
-                a01.Add(bmp);
+                playingcards.Add(bmp);
             }
-            Image plaatje = a01[nummer2 - 1];
+            Image plaatje = playingcards[nummer2 - 1];
             return plaatje;
             
         }
@@ -1332,7 +1331,7 @@ namespace Meme_Ory_Game
         // displays images in the chosen directory(need to chose path here tough, not in app)
         public void loadingimages()
         {
-            string[] files = Directory.GetFiles(path +"\\CAGE", "*" , SearchOption.TopDirectoryOnly);
+            string[] files = Directory.GetFiles(path +"\\memes", "*" , SearchOption.TopDirectoryOnly);
             // load order is odd it checks everything(with the lowest 1st digit) with 1  first then 2 etc. example: 12-17-2-29-4-59
             int teller = 0;
             int x = 0;
@@ -1365,9 +1364,49 @@ namespace Meme_Ory_Game
 
         }
 
+        public void musicselection() // selection thingy
+        {
+            
+            this.Controls.Add(musicselect);
+            var Roze = System.Drawing.Color.FromArgb(199, 21, 133);
+            var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
+            musicselect.Location = new Point(350, 300);
+            musicselect.Size = new Size(300, 50);
+            musicselect.Font = new Font("Lucida Sans", 15);
+            musicselect.Items.Clear();
+            string[] dirs = Directory.GetFiles(path+"\\CAGETUNES");
+            int PathLength = path.Length+11;
+            foreach (string directorynames in dirs)
+            {
+
+                directorynames.Replace(path, "");
+                musicselect.Items.Add(directorynames.Remove(0, PathLength));
+
+            };
+            musicselect.SelectedIndex = 0;
+            musicselect.BackColor = Wit;
+            musicselect.ForeColor = Roze;
+        }
+
+        public static SoundPlayer CustomMusic(string thema)// to do laterzszszszszs
+        {
+          //  string[] dirs = Directory.GetFiles(path + "\\CAGETUNES");
+          // send number via selceting the sruff and things, then return the file with the position of the number
+                     
+                SoundPlayer player = new SoundPlayer
+                {
+                    Stream = Properties.Resources.SpongeBob_Trap_Remix_Krusty_Krab
+                };
+                player.Load();
+                return player;
+            
+      
+        }
+
         // Background Music [Soundplayer]
         public static SoundPlayer Musicplayer(string thema)
         {
+           
 
             if (thema == "Spongebob")
             {
@@ -1420,69 +1459,48 @@ namespace Meme_Ory_Game
             }
         }
 
-        // Background [Image]
-        public void CreateCustom(string thema)
+        // Muting Music [Button]
+        public void MuteMusic()
         {
-            if (thema == "Spongebob")
+            this.Controls.Add(mute);
+            var Roze = System.Drawing.Color.FromArgb(199, 21, 133);
+            var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
+            mute.Location = new Point(840, 580);
+            mute.Size = new Size(100, 25);
+            mute.Text = "Sound";
+            mute.Click += new EventHandler(this.MuteButton_Click);
+            mute.ForeColor = Wit;
+            mute.BackColor = Roze;
+
+        }
+
+        //Muting Music [Button]
+        public void MuteButton_Click(object sender, EventArgs e)
+        {           
+            if (muted == false)
             {
-                Image Gamebackground = Properties.Resources.SBbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Nicolas Cage")
-            {
-                Image Gamebackground = Properties.Resources.NCbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Playing Cards")
-            {
-                Image Gamebackground = Properties.Resources.PCbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Memes")
-            {
-                Image Gamebackground = Properties.Resources.Mbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Rick & Morty")
-            {
-                Image Gamebackground = Properties.Resources.rmbackground;
-                this.BackgroundImage = Gamebackground;
+                
+                mplayer.Stop();
+                muted = true;
+                mute.Text = "Unmute Sound";
             }
             else
             {
-                Image Gamebackground = Properties.Resources.PCbackground;
-                this.BackgroundImage = Gamebackground;
+                mplayer.PlayLooping();
+                muted = false;
+                mute.Text = "Mute Sound";
             }
         }
 
         // Background [Image]
         public void CreateBackground(string thema)
         {
-            if (thema == "Spongebob")
-            {
-                Image Gamebackground = Properties.Resources.SBbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Nicolas Cage")
-            {
-                Image Gamebackground = Properties.Resources.NCbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Playing Cards")
-            {
-                Image Gamebackground = Properties.Resources.PCbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Memes")
-            {
-                Image Gamebackground = Properties.Resources.Mbackground;
-                this.BackgroundImage = Gamebackground;
-            }
-            else if (thema == "Rick & Morty")
-            {
-                Image Gamebackground = Properties.Resources.rmbackground;
-                this.BackgroundImage = Gamebackground;
-            }
+            string[] files = Directory.GetFiles(thema, "*", SearchOption.TopDirectoryOnly);
+            int suckymybutty = files.Length * 2;
+            string background = Thema.Text;
+            Image Gamebackground  ;
+            Gamebackground = CustomCards(suckymybutty, thema);           
+            this.BackgroundImage = Gamebackground;
         }
          
         // ???
