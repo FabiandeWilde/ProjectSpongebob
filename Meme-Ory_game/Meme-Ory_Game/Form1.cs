@@ -71,7 +71,7 @@ namespace Meme_Ory_Game
         Label player2Title = new Label();
         Label timerLabel = new Label();
         ListView Dynamisch = new ListView();
-        ListViewItem item = new ListViewItem();
+       // ListViewItem item = new ListViewItem();
         TableLayoutPanel MemoryPanel = new TableLayoutPanel();
         PictureBox GameTitle = new PictureBox();
         Button mute = new Button();
@@ -89,10 +89,10 @@ namespace Meme_Ory_Game
             CreateStartButton();
             CreateRulesButton();
             CreateHighScoreButton();
-            //CreateGameTitle();
+            CreateGameTitle();
             goback.Visible = false;
-            //loadingimages(); // test field
-             musicselection();
+           // loadingimages(); // test field
+          //    musicselection(); // test field
 
             //Image Gamebackground = Properties.Resources.Gamebackground;
             //this.BackgroundImage = Gamebackground;
@@ -239,6 +239,8 @@ namespace Meme_Ory_Game
             Save.Visible = true;
             Continue.Visible = true;
             reset.Visible = true;
+            goback.Visible = true;
+            goback.Location = new Point(820, 10);
             mplayer = Musicplayer(thema);
             mplayer.PlayLooping();
             MuteMusic();
@@ -316,6 +318,7 @@ namespace Meme_Ory_Game
         // Highscore [List]
         public void CreateListview() // improved
         {
+            // making of the highscore labels
             int labelXas = 200;
             int labelYas = 180;
             int sizeX = 200;
@@ -357,17 +360,20 @@ namespace Meme_Ory_Game
                     sizeX = 600;
                 }
                 this.Controls.Add(modes);
+                // end 
             }
-
+            //if no highscore file exist make an empty one to prevent errors with loading of the listviews
             if (!File.Exists((path + HighScore)))  {File.AppendAllText(path + HighScore, string.Empty);}
             if (!File.Exists((path + HighScore1))) { File.AppendAllText(path + HighScore1, string.Empty); }
             if (!File.Exists((path + HighScore2))) { File.AppendAllText(path + HighScore2, string.Empty); }
             if (!File.Exists((path + singleplayerhighscore1))) { File.AppendAllText(path + singleplayerhighscore1, string.Empty); }
             if (!File.Exists((path + singleplayerhighscore2))) { File.AppendAllText(path + singleplayerhighscore2, string.Empty); }
             if (!File.Exists((path + singleplayerhighscore3))) { File.AppendAllText(path + singleplayerhighscore3, string.Empty); }
- 
+            // end
+
+            // retrieving and storing of data
             string tekst = File.ReadAllText(path + HighScore);
-            string[] scores = tekst.Split('-');
+            string[] scores1 = tekst.Split('-');
             string tekst2 = File.ReadAllText(path + HighScore1);
             string[] scores2 = tekst2.Split('-');
             string tekst3 = File.ReadAllText(path + HighScore2);
@@ -378,13 +384,20 @@ namespace Meme_Ory_Game
             string[] scores5 = tekst5.Split('-');
             string tekst6 = File.ReadAllText(path + singleplayerhighscore3);
             string[] scores6 = tekst6.Split('-');
-
+            string[][] JaggedArrayScores = new string[6][];
+            JaggedArrayScores[0] = scores1;
+            JaggedArrayScores[1] = scores2;
+            JaggedArrayScores[2] = scores3;
+            JaggedArrayScores[3] = scores4;
+            JaggedArrayScores[4] = scores5;
+            JaggedArrayScores[5] = scores6;
+            //end  
+            // making of the listview controls(the highscore lists)
             int Xas = 200;
             int Yas = 200;
             for (int teller = 0; teller < 6; teller++)
             {
                 ListView Dynamisch = new ListView();
-
                 Dynamisch.Bounds = new Rectangle(new Point(Xas, Yas), new Size(200, 200));
                 Dynamisch.View = View.Details;
                 Dynamisch.AllowColumnReorder = true;
@@ -392,118 +405,49 @@ namespace Meme_Ory_Game
                 Dynamisch.GridLines = true;
                 Dynamisch.BackColor = Color.Wheat;
                 if (teller < 3)
-                {
+                {                  
                     Dynamisch.Columns.Add("Score", -2, HorizontalAlignment.Left);
                     Dynamisch.Columns.Add("Name", -2, HorizontalAlignment.Left);
                     Dynamisch.Sorting = SortOrder.Ascending;
+             
                 }
                 else
                 {
-                    Dynamisch.Columns.Add("Time", -2, HorizontalAlignment.Left);
+                    Dynamisch.Columns.Add("Time", -2, HorizontalAlignment.Left);                     
                     Dynamisch.Columns.Add("Name", -2, HorizontalAlignment.Left);
-                    Dynamisch.Sorting = SortOrder.Descending;
+                    Dynamisch.Sorting = SortOrder.Ascending;
+
                 }
                 Dynamisch.Name = Convert.ToString(teller);
 
                 Xas += 200;
                 if (teller == 2) { Xas = 200; Yas += 220; }
                 this.Controls.Add(Dynamisch);
+                //end
             }
-
-            foreach (Control variable in this.Controls)
-            {
+            // filling the score lists
+            int jaggedcounter = 0;
+            foreach (Control variable in Controls)
+            {                
                 if (variable is ListView)
                 {
-                    if ((variable as ListView).Name == "0")
-                    {
-                        int x = 0;
-                        for (int i = 0; i < (scores.Length - 2); i += 2)
-                        {
-                            ListViewItem item = new ListViewItem();
-                            item.Text = ""; // 1st column
-                            item.SubItems.Add(""); // 2nd column             
-                            (variable as ListView).Items.Add(item);
-                            (variable as ListView).Items[x].SubItems[0].Text = scores[(i + 1)]; // 1st value from array
-                            (variable as ListView).Items[x].SubItems[1].Text = scores[i]; // 2nd value from array                
-                            if (i % 2 == 0) x++;
-                        }
-
-                    }
-                  else  if ((variable as ListView).Name == "1")
-                    {
-                        int x = 0;
-                        for (int i = 0; i < (scores2.Length - 2); i += 2)
-                        {
-                            ListViewItem item = new ListViewItem();
-                            item.Text = ""; // 1st column
-                            item.SubItems.Add(""); // 2nd column             
-                            (variable as ListView).Items.Add(item);
-                            (variable as ListView).Items[x].SubItems[0].Text = scores2[(i + 1)]; // 1st value from array
-                            (variable as ListView).Items[x].SubItems[1].Text = scores2[i]; // 2nd value from array                
-                            if (i % 2 == 0) x++;
-                        }
-                    }
-                  else  if ((variable as ListView).Name == "2")
-                    {
-                        int x = 0;
-                        for (int i = 0; i < (scores3.Length - 2); i += 2)
-                        {
-                            ListViewItem item = new ListViewItem();
-                            item.Text = ""; // 1st column
-                            item.SubItems.Add(""); // 2nd column             
-                            (variable as ListView).Items.Add(item);
-                            (variable as ListView).Items[x].SubItems[0].Text = scores3[(i + 1)]; // 1st value from array
-                            (variable as ListView).Items[x].SubItems[1].Text = scores3[i]; // 2nd value from array                
-                            if (i % 2 == 0) x++;
-                        }
-                    }
-                else    if ((variable as ListView).Name == "3")
-                    {
-                        int x = 0;
-                        for (int i = 0; i < (scores4.Length - 2); i += 2)
-                        {
-                            ListViewItem item = new ListViewItem();
-                            item.Text = ""; // 1st column
-                            item.SubItems.Add(""); // 2nd column             
-                            (variable as ListView).Items.Add(item);
-                            (variable as ListView).Items[x].SubItems[0].Text = scores4[(i + 1)]; // 1st value from array
-                            (variable as ListView).Items[x].SubItems[1].Text = scores4[i]; // 2nd value from array                
-                            if (i % 2 == 0) x++;
-                        }
-                    }
-                else    if ((variable as ListView).Name == "4")
-                    {
-                        int x = 0;
-                        for (int i = 0; i < (scores5.Length - 2); i += 2)
-                        {
-                            ListViewItem item = new ListViewItem();
-                            item.Text = ""; // 1st column
-                            item.SubItems.Add(""); // 2nd column             
-                            (variable as ListView).Items.Add(item);
-                            (variable as ListView).Items[x].SubItems[0].Text = scores5[(i + 1)]; // 1st value from array
-                            (variable as ListView).Items[x].SubItems[1].Text = scores5[i]; // 2nd value from array                
-                            if (i % 2 == 0) x++;
-                        }
-
-                    }
-               else     if ((variable as ListView).Name == "5")
-                    {
-                        int x = 0;
-                        for (int i = 0; i < (scores6.Length - 2); i += 2)
-                        {
-                            ListViewItem item = new ListViewItem();
-                            item.Text = ""; // 1st column
-                            item.SubItems.Add(""); // 2nd column             
-                            (variable as ListView).Items.Add(item);
-                            (variable as ListView).Items[x].SubItems[0].Text = scores6[(i + 1)]; // 1st value from array
-                            (variable as ListView).Items[x].SubItems[1].Text = scores6[i]; // 2nd value from array                
-                            if (i % 2 == 0) x++;
-                        }
-                    }
-                }
-            }
-        }
-
+                  int x = 0;                       
+                  for (int i = 0; i < JaggedArrayScores[jaggedcounter].Length - 2; i += 2)
+                      {
+                        ListViewItem item = new ListViewItem();
+                        item.Text = "x"; // 1st column
+                        item.SubItems.Add("x"); // 2nd column             
+                        (variable as ListView).Items.Add(item);
+                        (variable as ListView).Items[x].SubItems[0].Text = JaggedArrayScores[jaggedcounter][i + 1]; // 1st value from array (the score)
+                        (variable as ListView).Items[x].SubItems[1].Text = JaggedArrayScores[jaggedcounter][i]; // 2nd value from array       (the name)         
+                            x++;
+                      }
+                  jaggedcounter++;
+                    //end
+                 }
+             }
+      }
+     
         // Continue [Button] && Save [Button]
         public void CreateContinueSaveButton()
         {
@@ -531,7 +475,7 @@ namespace Meme_Ory_Game
         // Continue [Function]
         public void ContinueButton_Click(object sender, EventArgs e)
         {
-
+            // fills the variables from the specific save file
             string tekst = "-";
             int teller = 0;
             int trueteller = 0;
@@ -539,9 +483,8 @@ namespace Meme_Ory_Game
             if (Gamemode.Text == "Multiplayer")
             {
                 if (Amount == 4) { tekst = File.ReadAllText(savefile1); }
-              else  if (Amount == 6) { tekst = File.ReadAllText(savefile2); }
-              else  if (Amount == 8) { tekst = File.ReadAllText(savefile3); }
-
+          else  if (Amount == 6) { tekst = File.ReadAllText(savefile2); }
+          else  if (Amount == 8) { tekst = File.ReadAllText(savefile3); }
 
                 scores = tekst.Split('-');
                 PlayerNameLabel_1.Text = scores[0];
@@ -584,36 +527,6 @@ namespace Meme_Ory_Game
                     if (x.Enabled == false)
                     {
                         int nummer = Convert.ToInt32(x.Name);
-                       // if (Thema.Text == "Spongebob")
-                       // {
-                       //     nummer = Convert.ToInt32(x.Name);
-                       //     (x as Button).BackgroundImage = Spongebob(nummer);
-                       // }
-                       //else  if (Thema.Text == "Memes")
-                       // {
-                       //     nummer = Convert.ToInt32(x.Name);
-                       //     (x as Button).BackgroundImage = Meme(nummer);
-                       // }
-                       // else if (Thema.Text == "Nicolas Cage")
-                       // {
-                       //     nummer = Convert.ToInt32(x.Name);
-                       //     (x as Button).BackgroundImage = Cage(nummer);
-                       // }
-                       // else if (Thema.Text == "Playing Cards")
-                       // {
-                       //     nummer = Convert.ToInt32(x.Name);
-                       //     (x as Button).BackgroundImage = Speelkaarten(nummer);
-                       // }
-                       // else if (Thema.Text == "Rick & Morty")
-                       // {
-                       //     nummer = Convert.ToInt32(x.Name);
-                       //     (x as Button).BackgroundImage = RickMorty(nummer);
-                       // }
-                       // else if (Thema.Text == "CustomCards")
-                       // {
-                       //     nummer = Convert.ToInt32(x.Name);
-                       //     (x as Button).BackgroundImage = CustomCards(nummer, thema);
-                       // }
                         (x as Button).BackgroundImage = CustomCards(nummer, thema);
                     }
                     trueteller += 2;
@@ -624,6 +537,14 @@ namespace Meme_Ory_Game
         // Save [Function]
         public void SaveButton_Click(object sender, EventArgs e)
         {
+            string[] savefilesarray = new string[6];
+            savefilesarray[0] = savefile1;
+            savefilesarray[1] = savefile2;
+            savefilesarray[2] = savefile3;
+            savefilesarray[3] = savefile4;
+            savefilesarray[4] = savefile5;
+            savefilesarray[5] = savefile6;
+            string specificsavefile = " ";
             // Variables to be saved:
             // Player names ~~ player scores ~~ turn scores ~~ player's turn name ~~ field tiles ~~ timer(singelplayer)
             if (firstClicked!= null)
@@ -633,137 +554,58 @@ namespace Meme_Ory_Game
                 firstClicked = null;
             }
 
+
             if (Gamemode.Text == "Multiplayer")
             {
-                if (Amount == 4)
-                {
-                    File.WriteAllText(savefile1, String.Empty);
-                    File.AppendAllText(path + savefile1, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
+                if (Amount == 4) { specificsavefile = savefilesarray[0]; }
+                else if (Amount == 6) { specificsavefile = savefilesarray[1]; }
+                else if (Amount == 6) { specificsavefile = savefilesarray[2]; }
+                //make loop above it to set savefile variable
 
-                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                File.WriteAllText(specificsavefile, String.Empty);
+                File.AppendAllText(path + specificsavefile, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
+
+                foreach (Control x in MemoryPanel.Controls) // Saving of the cards
+                {
+                    if (x is Button)
                     {
-                        if (x is Button)
+                        File.AppendAllText(specificsavefile, Convert.ToString(x.Name) + "-");
+                        if (((x as Button).Enabled) == false)
                         {
-                            File.AppendAllText(savefile1, Convert.ToString(x.Name) + "-");
-                            if (((x as Button).Enabled) == false)
-                            {
-                                File.AppendAllText(savefile1, "false" + "-");
-                            }
-                            else
-                            {
-                                File.AppendAllText(savefile1, "true" + "-");
-                            }
+                            File.AppendAllText(specificsavefile, "false" + "-");
                         }
-                    }
-                }
-                else if (Amount == 6)
-                {
-                    File.WriteAllText(path + savefile2, String.Empty);
-                    File.AppendAllText(path + savefile2, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
-
-                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
-                    {
-                        if (x is Button)
+                        else
                         {
-                            File.AppendAllText(path + savefile2, Convert.ToString(x.Name) + "-");
-                            if (((x as Button).Enabled) == false)
-                            {
-                                File.AppendAllText(path + savefile2, "false" + "-");
-                            }
-                            else
-                            {
-                                File.AppendAllText(path + savefile2, "true" + "-");
-                            }
-                        }
-                    }
-                }
-                else if (Amount == 8)
-                {
-                    File.WriteAllText(path + savefile3, String.Empty);
-                    File.AppendAllText(path + savefile3, (PlayerNameLabel_1.Text + "-" + player1score + "-" + PlayerNameLabel_2.Text + "-" + player2score + "-" + player1beurt + "-" + PlayerTurn.Text + "-"));
-
-                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
-                    {
-                        if (x is Button)
-                        {
-                            File.AppendAllText(path + savefile3, Convert.ToString(x.Name) + "-");
-                            if (((x as Button).Enabled) == false)
-                            {
-                                File.AppendAllText(path + savefile3, "false" + "-");
-                            }
-                            else
-                            {
-                                File.AppendAllText(path + savefile3, "true" + "-");
-                            }
+                            File.AppendAllText(specificsavefile, "true" + "-");
                         }
                     }
                 }
             }
             else  // singeplayer
             {
-                if (Amount == 4)
-                {
-                    File.WriteAllText(savefile4, String.Empty);
-                    File.AppendAllText(path + savefile4, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
+
+                if      (Amount == 4) { specificsavefile = savefilesarray[3]; }
+                else if (Amount == 6) { specificsavefile = savefilesarray[4]; }
+                else if (Amount == 6) { specificsavefile = savefilesarray[5]; }
+              
+                    File.WriteAllText(specificsavefile, String.Empty);
+                    File.AppendAllText(path + specificsavefile, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
 
                     foreach (Control x in MemoryPanel.Controls) // Saving of the cards
                     {
                         if (x is Button)
                         {
-                            File.AppendAllText(savefile4, Convert.ToString(x.Name) + "-");
+                            File.AppendAllText(specificsavefile, Convert.ToString(x.Name) + "-");
                             if (((x as Button).Enabled) == false)
                             {
-                                File.AppendAllText(savefile4, "false" + "-");
+                                File.AppendAllText(specificsavefile, "false" + "-");
                             }
                             else
                             {
-                                File.AppendAllText(savefile4, "true" + "-");
+                                File.AppendAllText(specificsavefile, "true" + "-");
                             }
                         }
-                    }
-                }
-                else if (Amount == 6)
-                {
-                    File.WriteAllText(path + savefile5, String.Empty);
-                    File.AppendAllText(path + savefile5, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
-
-                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
-                    {
-                        if (x is Button)
-                        {
-                            File.AppendAllText(path + savefile5, Convert.ToString(x.Name) + "-");
-                            if (((x as Button).Enabled) == false)
-                            {
-                                File.AppendAllText(path + savefile5, "false" + "-");
-                            }
-                            else
-                            {
-                                File.AppendAllText(path + savefile5, "true" + "-");
-                            }
-                        }
-                    }
-                }
-                else if (Amount == 8)
-                {
-                    File.WriteAllText(path + savefile6, String.Empty);
-                    File.AppendAllText(path + savefile6, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
-
-                    foreach (Control x in MemoryPanel.Controls) // Saving of the cards
-                    {
-                        if (x is Button)
-                        {
-                            File.AppendAllText(path + savefile6, Convert.ToString(x.Name) + "-");
-                            if (((x as Button).Enabled) == false)
-                            {
-                                File.AppendAllText(path + savefile6, "false" + "-");
-                            }
-                            else
-                            {
-                                File.AppendAllText(path + savefile6, "true" + "-");
-                            }
-                        }
-                    }
-                }
+                    }                
             }
         }
 
@@ -786,8 +628,12 @@ namespace Meme_Ory_Game
         // Go Back [Function]
         public void GoBackbutton_Click(object sender, EventArgs e) // improved
         {
-            //mplayer.Stop();
-            //mplayer.Stream = null;
+            if (mplayer !=null)
+            {
+                mplayer.Stop();
+                mplayer.Stream = null;
+            }
+           
             FormClosed += (o, a) => new Form1().ShowDialog();
             Hide();
             Close();
@@ -834,6 +680,7 @@ namespace Meme_Ory_Game
             reset.ForeColor = Wit;
         }
 
+        // Rules [Textfield]
         public void CreateRulesLabel()
         {
             this.Controls.Add(Rules);
@@ -861,7 +708,7 @@ namespace Meme_Ory_Game
             }
         }
 
-        // Field Size [Box]
+        // Field Size [ComboBox]
         public void CreateComboBox()
         {
             this.Controls.Add(Speelveld);
@@ -873,8 +720,10 @@ namespace Meme_Ory_Game
             Speelveld.Items.Clear();
             Speelveld.Items.AddRange(new object[] { "4x4", "6x6", "8x8" });
             Speelveld.SelectedIndex = 0;
+            Speelveld.DropDownStyle = ComboBoxStyle.DropDownList;
             Speelveld.BackColor = Wit;
             Speelveld.ForeColor = Roze;
+           
         }
 
         // Gamemode [Box] && Gamemode Title [Label]
@@ -891,6 +740,7 @@ namespace Meme_Ory_Game
             Gamemode.SelectedIndex = 0;
             Gamemode.BackColor = Wit;
             Gamemode.ForeColor = Roze;
+            Gamemode.DropDownStyle = ComboBoxStyle.DropDownList;
 
             this.Controls.Add(GamemodeTitle);
             GamemodeTitle.Location = new Point(150, 250);
@@ -958,7 +808,7 @@ namespace Meme_Ory_Game
             Thema.Items.Clear();
             string[] dirs = Directory.GetDirectories(path);
             int PathLength = path.Length;
-            string MusicRemove = path +"CAGETUNES";// to remove music directory
+            string MusicRemove = path +"CAGETUNES";// to remove music directory, which is a no go becuase of cruel groupmembers
             dirs = dirs.Where(val => val != MusicRemove).ToArray();// see above
             foreach (string directorynames in dirs)
             {
@@ -970,6 +820,7 @@ namespace Meme_Ory_Game
             Thema.SelectedIndex = 0;
             Thema.BackColor = Wit;
             Thema.ForeColor = Roze;
+            Thema.DropDownStyle = ComboBoxStyle.DropDownList;
         }     
 
         // Field layout [Panel]
@@ -1191,15 +1042,15 @@ namespace Meme_Ory_Game
                 timer.Stop();
                 if (Amount == 4)
                 {
-                    File.AppendAllText(path + singleplayerhighscore1, (PlayerName_1.Text + "-" + player1score + "-" + Environment.NewLine));
+                    File.AppendAllText(path + singleplayerhighscore1, (PlayerName_1.Text + "-" + timerCount + "-" + Environment.NewLine));
                 }
                 else if (Amount == 6)
                 {
-                    File.AppendAllText(path + singleplayerhighscore2, (PlayerName_1.Text + "-" + player1score + "-" + Environment.NewLine));
+                    File.AppendAllText(path + singleplayerhighscore2, (PlayerName_1.Text + "-" + timerCount + "-" + Environment.NewLine));
                 }
                 else if (Amount == 8)
                 {
-                    File.AppendAllText(path + singleplayerhighscore3, (PlayerName_1.Text + "-" + player1score + "-" + Environment.NewLine));
+                    File.AppendAllText(path + singleplayerhighscore3, (PlayerName_1.Text + "-" + timerCount + "-" + Environment.NewLine));
                 }
                 MessageBox.Show(PlayerName_1.Text + " won this game within " + timerCount + " seconds");
             }
@@ -1294,7 +1145,7 @@ namespace Meme_Ory_Game
         public static Image Background(string thema) 
         {
             string[] files = Directory.GetFiles(thema, "*", SearchOption.TopDirectoryOnly);
-            int image33 = files.Length ;         
+            int image33 = (files.Length * 2) - 2;         
             Image keuze = CustomCards(image33, thema);
             return keuze;
         }
@@ -1303,7 +1154,6 @@ namespace Meme_Ory_Game
         {
             
             string path = System.AppDomain.CurrentDomain.BaseDirectory;
-         //   string themas = thema; //i guess its useless
             string[] files = Directory.GetFiles(thema, "*", SearchOption.TopDirectoryOnly);
             
             int nummer2 = nummer / 2;
@@ -1328,86 +1178,9 @@ namespace Meme_Ory_Game
             
         }
 
-        // displays images in the chosen directory(need to chose path here tough, not in app)
-        public void loadingimages()
-        {
-            string[] files = Directory.GetFiles(path +"\\memes", "*" , SearchOption.TopDirectoryOnly);
-            // load order is odd it checks everything(with the lowest 1st digit) with 1  first then 2 etc. example: 12-17-2-29-4-59
-            int teller = 0;
-            int x = 0;
-            int y = 0;
-            foreach (var filename in files)
-            {
-                Bitmap bmp = null;
-                try
-                {
-                    bmp = new Bitmap(filename);
-                }
-                catch (Exception e)
-                {
-                    // remove this if you don't want to see the exception message
-                    MessageBox.Show(e.Message);
-                    continue;
-                }
-
-                var card = new PictureBox();
-                card.BackgroundImage = bmp;
-                card.Padding = new Padding(0);
-                card.BackgroundImageLayout = ImageLayout.Stretch;
-                card.Size = new Size(50, 50);
-                card.Location = new Point(x,y);
-                teller += 1;
-                x += 50;
-                if (teller == 16) { x = 0;y += 50; }
-                this.Controls.Add(card);
-            }
-
-        }
-
-        public void musicselection() // selection thingy
-        {
-            
-            this.Controls.Add(musicselect);
-            var Roze = System.Drawing.Color.FromArgb(199, 21, 133);
-            var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
-            musicselect.Location = new Point(350, 300);
-            musicselect.Size = new Size(300, 50);
-            musicselect.Font = new Font("Lucida Sans", 15);
-            musicselect.Items.Clear();
-            string[] dirs = Directory.GetFiles(path+"\\CAGETUNES");
-            int PathLength = path.Length+11;
-            foreach (string directorynames in dirs)
-            {
-
-                directorynames.Replace(path, "");
-                musicselect.Items.Add(directorynames.Remove(0, PathLength));
-
-            };
-            musicselect.SelectedIndex = 0;
-            musicselect.BackColor = Wit;
-            musicselect.ForeColor = Roze;
-        }
-
-        public static SoundPlayer CustomMusic(string thema)// to do laterzszszszszs
-        {
-          //  string[] dirs = Directory.GetFiles(path + "\\CAGETUNES");
-          // send number via selceting the sruff and things, then return the file with the position of the number
-                     
-                SoundPlayer player = new SoundPlayer
-                {
-                    Stream = Properties.Resources.SpongeBob_Trap_Remix_Krusty_Krab
-                };
-                player.Load();
-                return player;
-            
-      
-        }
-
         // Background Music [Soundplayer]
-        public static SoundPlayer Musicplayer(string thema)
+        public static SoundPlayer Musicplayer(string thema)// loopable supremely loopable maybe maybe not
         {
-           
-
             if (thema == "Spongebob")
             {
                 SoundPlayer player = new SoundPlayer
@@ -1465,30 +1238,29 @@ namespace Meme_Ory_Game
             this.Controls.Add(mute);
             var Roze = System.Drawing.Color.FromArgb(199, 21, 133);
             var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
-            mute.Location = new Point(840, 580);
-            mute.Size = new Size(100, 25);
-            mute.Text = "Sound";
+            mute.Location = new Point(840, 560);
+            mute.Size = new Size(80, 80);
             mute.Click += new EventHandler(this.MuteButton_Click);
             mute.ForeColor = Wit;
             mute.BackColor = Roze;
+            mute.Image = Properties.Resources.mute;
 
         }
 
         //Muting Music [Button]
         public void MuteButton_Click(object sender, EventArgs e)
-        {           
+        {
             if (muted == false)
             {
-                
                 mplayer.Stop();
                 muted = true;
-                mute.Text = "Unmute Sound";
+                mute.Image = Properties.Resources.mute;
             }
             else
             {
                 mplayer.PlayLooping();
                 muted = false;
-                mute.Text = "Mute Sound";
+                mute.Image = Properties.Resources.speaker;
             }
         }
 
