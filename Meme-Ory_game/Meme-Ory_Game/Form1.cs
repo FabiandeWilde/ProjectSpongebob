@@ -245,10 +245,12 @@ namespace Meme_Ory_Game
             MuteMusic();
             if (Gamemode.Text == "Singleplayer")
             {
-                //CreateTimerLabel();
-                //CreateTimer();
                 Player1Score.Visible = false;
-                //timerLabel.Visible = true;
+                
+                    CreateTimerLabel();
+                    CreateTimer();
+                    timerLabel.Visible = true;
+                
             }
             else
             {
@@ -707,19 +709,35 @@ namespace Meme_Ory_Game
         public void CreateRulesLabel()
         {
             this.Controls.Add(Rules);
-            Rules.Size = new Size(444, 457);
-            Rules.Text = "Spelregels \n\nSpelers\nHet spel kan alleen of met twee spelers gespeeld worden.\n\nDoel\nHet doel van het singleplayer spel is om binnen de tijd,\nzoveel mogelijk paren van kaartjes te maken.\nHoe sneller je bent, hoe hoger je score.\n\nHet doel van het multiplayer spel is om zoveel mogelijk paartjes van kaarten te maken.\nAls je meer paartjes hebt dan je tegenstander, win je het spel.\n\nRegels\nBij singleplayer voer je je naam in en je kiest op welke moeilijkheidsgraad je wilt spelen.\nJe speelt tegen tijd.\n\nBij multiplayer is de eerste speler die zijn naam in voert is als eerste aan de beurt.\nAls je een correct paar hebt, mag je nog een keer.\nAls je een incorrect paar hebt, is de tegenstander aan de beurt.\nHet spel gaat door totdat het laatste paartje is omgedraait.\nVoor het laatste omgedraaide paar zijn er geen punten te verkrijgen.\n\nTips\nLet op welke kaartjes je tegenstander omdraait, zodat je niet hetzelfde doet.";
-            Rules.BackgroundImageLayout = ImageLayout.Stretch;
+            Rules.Size = new Size(600, 600);
+            Rules.Text = "Spelregels \n\nSpelers\nHet spel kan alleen of met twee spelers gespeeld worden.\n" +
+                "\nDoel\nHet doel van het singleplayer spel is om binnen de tijd,\nzoveel mogelijk paren van kaartjes te maken.\nHoe sneller je bent, hoe hoger je score.\n" +
+                "\nHet doel van het multiplayer spel is om zoveel mogelijk paartjes van kaarten te maken.\nAls je meer paartjes hebt dan je tegenstander, win je het spel.\n" +
+                "\nRegels\nBij singleplayer voer je je naam in en je kiest op welke moeilijkheidsgraad je wilt spelen.\nJe speelt tegen tijd.\n" +
+                "\nBij multiplayer is de eerste speler die zijn naam in voert is als eerste aan de beurt.\nAls je een correct paar hebt, mag je nog een keer." +
+                "\nAls je een incorrect paar hebt, is de tegenstander aan de beurt.\nHet spel gaat door totdat het laatste paartje is omgedraait." +
+                "\nVoor het laatste omgedraaide paar zijn er geen punten te verkrijgen.\n\nTips\nLet op welke kaartjes je tegenstander omdraait, zodat je niet hetzelfde doet." +
+                "\n\nCustom Thema\nJe kunt een custom thema toevoegen door een nieuwe map met afbeeldingen aan te maken naast de .exe file." +
+                "\nDe naam van de map wordt in het spel weergeven als thema."+
+                "\nDe laatste afbeelding wordt de achtergrond van het spel, en de voorlaatste afbeelding wordt de cardback." +
+                "\nEr kunnen meerdere custom thema's gemaakt worden.";
+            Rules.BackColor = Color.Transparent;
+            var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
+            Rules.Location = new Point(350, 15);
+            Rules.ForeColor = Wit;
+            Rules.Font = new Font("Lucida Sans", 10);
         }
 
         // Reset [Function]
         public void Resetbutton_Click(object sender, EventArgs e)
         {
+
             MemoryPanel.Visible = false;
              CreateLayoutPanel();
 
             if (Gamemode.Text == "Singleplayer")
             {
+
                 timer.Start();
                 timerCount = 0;
                 player1score = 0;
@@ -852,12 +870,7 @@ namespace Meme_Ory_Game
         public void CreateLayoutPanel()
         {
             DoubleBuffered = true;
-            if (Gamemode.Text == "Singleplayer")
-            {
-                CreateTimerLabel();
-                CreateTimer();
-                timerLabel.Visible = true;
-            }
+            
                 MemoryPanel.Controls.Clear();
             MemoryPanel.RowStyles.Clear();
             MemoryPanel.ColumnStyles.Clear();
@@ -880,7 +893,7 @@ namespace Meme_Ory_Game
                 {
                     //Text enabled for testing, removed for final product
                     
-                    Text = Convert.ToString(randomarray[i]),
+                    //Text = Convert.ToString(randomarray[i]),
                     Name = Convert.ToString(randomarray[i]),
                     BackgroundImage = Background(thema),
                     BackgroundImageLayout = ImageLayout.Stretch,
