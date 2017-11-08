@@ -202,7 +202,6 @@
     <None Include="Resources\Meme_7.jpg" />
     <None Include="Resources\Meme_8.jpg" />
     <None Include="Resources\nicolas_0.jpg" />
-    <None Include="Resources\nicolas_1.jpg" />
     <None Include="Resources\nicolas_10.jpg" />
     <None Include="Resources\nicolas_11.jpg" />
     <None Include="Resources\nicolas_12.jpg" />
@@ -280,6 +279,7 @@
     <None Include="Resources\pccardback.png" />
     <None Include="Resources\Mbackground.png" />
     <None Include="Resources\mute.png" />
+    <None Include="Resources\nicolas_1.jpg" />
     <Content Include="Resources\s01.bmp" />
     <Content Include="Resources\s02.bmp" />
     <Content Include="Resources\s03.bmp" />

@@ -38,7 +38,7 @@ namespace Meme_Ory_Game
         string singleplayerhighscore2 = "Singleplayer2.txt";
         string singleplayerhighscore3 = "Singleplayer3.txt";
         bool player1beurt = true;
-        bool muted = true;
+        bool muted = false;
         ComboBox Speelveld = new ComboBox();
         ComboBox Gamemode = new ComboBox();
         ComboBox Thema = new ComboBox();
@@ -91,9 +91,6 @@ namespace Meme_Ory_Game
             CreateHighScoreButton();
             CreateGameTitle();
             goback.Visible = false;
-           // loadingimages(); // test field
-          //    musicselection(); // test field
-
             Image Gamebackground = Properties.Resources.Gamebackground;
             BackgroundImage = Gamebackground;
             BackgroundImageLayout = ImageLayout.Center;
@@ -104,7 +101,7 @@ namespace Meme_Ory_Game
         public void CreateGameTitle()
         {
             this.Controls.Add(GameTitle);
-            GameTitle.Location = new Point(320, 10);
+            GameTitle.Location = new Point(360, 10);
             GameTitle.Size = new Size(600, 140);
             GameTitle.Image = Properties.Resources.Gamelogo;
             GameTitle.BackColor = Color.Transparent;
@@ -242,7 +239,7 @@ namespace Meme_Ory_Game
             Continue.Visible = true;
             reset.Visible = true;
             goback.Visible = true;
-            goback.Location = new Point(820, 10);
+            goback.Location = new Point(840, 555);
             mplayer = Musicplayer(thema);
             mplayer.PlayLooping();
             MuteMusic();
@@ -615,7 +612,7 @@ namespace Meme_Ory_Game
                 else if (Amount == 6) { specificsavefile = savefilesarray[5]; }
               
                     File.WriteAllText(specificsavefile, String.Empty);
-                    File.AppendAllText(path + specificsavefile, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player1score + "-"));
+                    File.AppendAllText(path + specificsavefile, (PlayerNameLabel_1.Text + "-" + timerCount + "-" + player1score + "-" + player2score + "-"));
 
                     foreach (Control x in MemoryPanel.Controls) // Saving of the cards
                     {
@@ -896,7 +893,7 @@ namespace Meme_Ory_Game
             maxscore = Amount * Amount / 2;
             this.Controls.Add(MemoryPanel);
             BackgroundImage = CreateBackground(thema);
-            BackgroundImageLayout = ImageLayout.Center;
+            BackgroundImageLayout = ImageLayout.Stretch;
             MemoryPanel.BackColor = Color.Transparent;
             MemoryPanel.Visible = true;
 
@@ -1027,9 +1024,30 @@ namespace Meme_Ory_Game
                     int nummer = Convert.ToInt32(lastflip.Name);
                     if ((lastflip as Button).Enabled == true)
                     {
-         
-                        lastflip.BackgroundImage = CustomCards(nummer, thema);
-                        lastflip.BackgroundImageLayout = ImageLayout.Stretch; ;
+                        switch (thema)
+                        {
+                            case "Playing Cards":
+                                lastflip.BackgroundImage = Speelkaarten(nummer);
+                                break;
+                            case "Memes":
+                                lastflip.BackgroundImage = Meme(nummer);
+                                break;
+                            case "Nicolas Cage":
+                                lastflip.BackgroundImage = Cage(nummer);
+                                break;
+                            case "Rick & Morty":
+                                lastflip.BackgroundImage = RickMorty(nummer);
+                                break;
+                            case "Spongebob":
+                                lastflip.BackgroundImage = Spongebob(nummer);
+                                break;
+
+                            default:
+                                lastflip.BackgroundImage = CustomCards(nummer, thema);
+                                break;
+                                
+                        }
+                        lastflip.BackgroundImageLayout = ImageLayout.Stretch;
                     }
                 }
             }
@@ -1322,16 +1340,16 @@ namespace Meme_Ory_Game
             this.Controls.Add(mute);
             var Roze = System.Drawing.Color.FromArgb(199, 21, 133);
             var Wit = System.Drawing.Color.FromArgb(255, 255, 255);
-            mute.Location = new Point(840, 560);
+            mute.Location = new Point(850, 10);
             mute.Size = new Size(80, 80);
             mute.Click += new EventHandler(this.MuteButton_Click);
             mute.ForeColor = Wit;
             mute.BackColor = Roze;
-            mute.Image = Properties.Resources.mute;
+            mute.Image = Properties.Resources.speaker;
 
         }
 
-        //Muting Music [Button]
+        //Muting Music [Function]
         public void MuteButton_Click(object sender, EventArgs e)
         {
             if (muted == false)

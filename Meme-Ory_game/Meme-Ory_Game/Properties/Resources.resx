@@ -229,9 +229,6 @@
   <data name="nicolas_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nicolas_0.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="nicolas_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nicolas_1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="nicolas_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nicolas_10.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -544,9 +541,6 @@
   <data name="rmmusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rmmusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Gamelogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Gamelogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Gamebackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gamebackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -675,5 +669,11 @@
   </data>
   <data name="image_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image_9.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Gamelogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gamelogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nicolas_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\nicolas_1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
